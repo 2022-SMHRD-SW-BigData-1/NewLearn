@@ -21,6 +21,7 @@ import { useLocation, Route, Switch, Redirect } from "react-router-dom";
 import { Container } from "reactstrap";
 // core components
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
+import AuthNavbar from "components/Navbars/AuthNavbar.js";
 import AdminFooter from "components/Footers/AdminFooter.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 
@@ -36,6 +37,7 @@ const Admin = (props) => {
     mainContent.current.scrollTop = 0;
   }, [location]);
 
+  // rout 바꾸는 거
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.layout === "/admin") {
@@ -77,10 +79,19 @@ const Admin = (props) => {
         }}
       />
       <div className="main-content" ref={mainContent}>
-        <AdminNavbar
-          {...props}
-          brandText={getBrandText(props.location.pathname)}
-        />
+        {/* 여기가 상단 네비 바  */}
+        {JSON.parse(localStorage.getItem("user")) == undefined ? (
+          <AuthNavbar
+            {...props}
+            brandText={getBrandText(props.location.pathname)}
+          />
+        ) : (
+          <AdminNavbar
+            {...props}
+            brandText={getBrandText(props.location.pathname)}
+          />
+        )}
+
         <Switch>
           {getRoutes(routes)}
           <Redirect from="*" to="/admin/index" />

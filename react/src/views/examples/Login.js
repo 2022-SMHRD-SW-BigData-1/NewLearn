@@ -30,7 +30,19 @@ const Login = () => {
       })
       .then((res) => {
         if (res.data.result == "success") {
-          console.log("성공");
+          try {
+            localStorage.setItem(
+              "user",
+              JSON.stringify({
+                id: res.data.id,
+                pw: res.data.pw,
+                nick: res.data.nick,
+              })
+            );
+          } catch (error) {
+            console.log("값 안들어가졌다");
+          }
+          console.log(JSON.parse(localStorage.getItem("user")).nick);
           history.push("/admin");
         } else {
           return <Link to="/auth/login"></Link>;
