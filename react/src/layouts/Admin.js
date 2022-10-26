@@ -25,16 +25,23 @@ import AuthNavbar from "components/Navbars/AuthNavbar.js";
 import AdminFooter from "components/Footers/AdminFooter.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 
-import routes from "routes.js";
+import routesF from "routes.js";
+import routesS from "routesF.js";
 
 const Admin = (props) => {
-  const mainContent = React.useRef(null);
+  const mainContent = React.useRef();
   const location = useLocation();
+  const [routes, setRoutes] = React.useState(routesF);
 
   React.useEffect(() => {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
     mainContent.current.scrollTop = 0;
+    if (JSON.parse(localStorage.getItem("user")) == undefined) {
+      setRoutes(routesF);
+    } else {
+      setRoutes(routesS);
+    }
   }, [location]);
 
   // rout 바꾸는 거
