@@ -36,6 +36,18 @@ import {
 } from "reactstrap";
 
 const AdminNavbar = (props) => {
+  let user = localStorage.getItem("user");
+  let nick = "";
+  try {
+    if (JSON.parse(user).nick == undefined) {
+      nick = "값 안들어옴";
+    } else {
+      nick = JSON.parse(user).nick;
+    }
+  } catch (error) {}
+  function logout() {
+    localStorage.removeItem("user");
+  }
   return (
     <>
       <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
@@ -70,7 +82,7 @@ const AdminNavbar = (props) => {
                   </span>
                   <Media className="ml-2 d-none d-lg-block">
                     <span className="mb-0 text-sm font-weight-bold">
-                      신은경
+                      {nick}
                     </span>
                   </Media>
                 </Media>
@@ -100,7 +112,15 @@ const AdminNavbar = (props) => {
                   <span>로그인</span>
                 </DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+                <DropdownItem
+                  href="#pablo"
+                  onClick={
+                    ((e) => {
+                      e.preventDefault();
+                    },
+                    logout)
+                  }
+                >
                   <i className="ni ni-user-run" />
                   <span>Logout</span>
                 </DropdownItem>

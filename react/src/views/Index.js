@@ -69,15 +69,16 @@ const Index = (props) => {
       <Container className="mt--7" fluid>
         <Row>
           <Col className="mb-5 mb-xl-0" xl="8">
+            {/* bg-gradient-default 이거 바탕색 검정색으로 변경함 */}
             <Card className="bg-gradient-default shadow">
               {/* 여기가 메인차트 하나??? */}
               <CardHeader className="bg-transparent">
                 <Row className="align-items-center">
                   <div className="col">
                     <h6 className="text-uppercase text-light ls-1 mb-1">
-                      Overview
+                      new Learn
                     </h6>
-                    <h2 className="text-white mb-0">삭제할내용</h2>
+                    <h2 className="text-white mb-0">New Learn</h2>
                   </div>
                   <div className="col">
                     <Nav className="justify-content-end" pills>
@@ -110,16 +111,7 @@ const Index = (props) => {
                   </div>
                 </Row>
               </CardHeader>
-              <CardBody>
-                {/* Chart */}
-                <div className="chart">
-                  <Line
-                    data={chartExample1[chartExample1Data]}
-                    options={chartExample1.options}
-                    getDatasetAtEvent={(e) => console.log(e)}
-                  />
-                </div>
-              </CardBody>
+              <CardBody>{/* Chart */}</CardBody>
             </Card>
           </Col>
           <Col xl="4">
@@ -130,7 +122,7 @@ const Index = (props) => {
                     <h6 className="text-uppercase text-muted ls-1 mb-1">
                       Performance
                     </h6>
-                    <h2 className="mb-0">Total orders</h2>
+                    <h2 className="mb-0">메인 오른쪽 상단</h2>
                   </div>
                 </Row>
               </CardHeader>
@@ -152,7 +144,7 @@ const Index = (props) => {
               <CardHeader className="border-0">
                 <Row className="align-items-center">
                   <div className="col">
-                    <h3 className="mb-0">Page visits</h3>
+                    <h3 className="mb-0">공지사항</h3>
                   </div>
                   <div className="col text-right">
                     <Button

@@ -13,7 +13,7 @@ const cors = require("cors");
 
 // 이 폴더 안에 있는 static 파일 가져다가 쓸게요!
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, "react-project", "build")));
+app.use(express.static(path.join(__dirname, "react", "build")));
 // axios로 값을 주고받을 때 꼭 필요한 미들웨어
 
 app.use(express.json());

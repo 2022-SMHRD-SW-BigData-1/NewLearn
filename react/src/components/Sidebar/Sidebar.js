@@ -20,6 +20,7 @@ import { useState } from "react";
 import { NavLink as NavLinkRRD, Link } from "react-router-dom";
 // nodejs library to set properties for components
 import { PropTypes } from "prop-types";
+const lo = require("../../assets/img/brand/logo.png");
 
 // reactstrap components
 import {
@@ -72,6 +73,7 @@ const Sidebar = (props) => {
   const createLinks = (routes) => {
     return routes.map((prop, key) => {
       return (
+        // 여기가 router에서 값 가져와서 버튼 만드는 곳
         <NavItem key={key}>
           <NavLink
             to={prop.layout + prop.path}
@@ -119,11 +121,7 @@ const Sidebar = (props) => {
         {/* Brand */}
         {logo ? (
           <NavbarBrand className="pt-0" {...navbarBrandProps}>
-            <img
-              alt={logo.imgAlt}
-              className="navbar-brand-img"
-              src={logo.imgSrc}
-            />
+            <img alt={logo.imgAlt} className="navbar-brand-img" src={lo} />
           </NavbarBrand>
         ) : null}
         {/* User */}
