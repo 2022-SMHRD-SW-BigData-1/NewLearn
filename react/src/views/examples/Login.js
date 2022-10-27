@@ -113,9 +113,9 @@ const Login = () => {
                     onChange={(e) => {
                       setID(e.target.value);
                     }}
-                    placeholder="Email"
-                    type="email"
-                    autoComplete="new-email"
+                    placeholder="아이디"
+                    type="text"
+                    // autoComplete="new-email"
                   />
                 </InputGroup>
               </FormGroup>
