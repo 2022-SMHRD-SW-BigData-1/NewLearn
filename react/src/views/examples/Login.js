@@ -24,7 +24,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     axios
-      .post("http://127.0.0.1:3001/joinData", {
+      .post("http://127.0.0.1:3001/Login", {
         id: ids,
         pw: pws,
       })

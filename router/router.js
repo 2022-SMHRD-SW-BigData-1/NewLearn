@@ -24,7 +24,7 @@ let conn = mysql.createConnection({
 // });
 
 // View (React) => router로 데이터 보내기
-router.post("/joinData", function (req, res) {
+router.post("/Login", function (req, res) {
   let id = req.body.id;
   let pw = req.body.pw;
   let sql = "select * from t_user where user_id = ? and user_pw =?";
@@ -36,6 +36,25 @@ router.post("/joinData", function (req, res) {
       let pws = rows[0].user_pw;
       let nicks = rows[0].user_name;
       res.json({ result: "success", id: ids, pw: pws, nick: nicks });
+    } else {
+      console.log(err);
+      res.json({ result: "False" });
+    }
+  });
+});
+router.post("/joinData", function (req, res) {
+  let id = req.body.id;
+  let pw = req.body.pw;
+  let name = req.body.name;
+  let phone = req.body.phone;
+  let nums = req.body.num;
+  let sql =
+    "insert into t_user(user_id,user_pw,user_name,user_rn,user_phone) values(?,?,?,?,?)";
+  conn.query(sql, [id, pw, name, nums, phone], function (err, rows) {
+    console.log("연결성공");
+    if (!err) {
+      console.log("회원가입 완료");
+      res.json({ result: "success" });
     } else {
       console.log(err);
       res.json({ result: "False" });

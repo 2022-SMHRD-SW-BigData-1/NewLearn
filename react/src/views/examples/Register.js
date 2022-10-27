@@ -31,15 +31,45 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import { useState } from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const Register = () => {
+  const history = useHistory();
+  const [user_name, setName] = useState("");
+  const [user_id, setId] = useState("");
+  const [user_pw, setPw] = useState("");
+  const [user_phone, setPhone] = useState("");
+  const [user_num, setNum] = useState("");
+
+  const handleJoin = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://127.0.0.1:3001/joinData", {
+        name: user_name,
+        id: user_id,
+        pw: user_pw,
+        phone: user_phone,
+        num: user_num,
+      })
+      .then((res) => {
+        if (res.data.result == "success") {
+          history.push("/auth");
+        } else {
+        }
+      })
+      .catch(() => {
+        console.log("데이터 보내기 실패");
+      });
+  };
   return (
     <>
       <Col lg="6" md="8">
         <Card className="bg-secondary shadow border-0">
           <CardHeader className="bg-transparent pb-5">
             <div className="text-muted text-center mt-2 mb-4">
-              <small>Sign up with</small>
+              <small>회원가입 페이지</small>
             </div>
             <div className="text-center">
               <Button
@@ -82,7 +112,7 @@ const Register = () => {
             <div className="text-center text-muted mb-4">
               <small>Or sign up with credentials</small>
             </div>
-            <Form role="form">
+            <Form role="form" onSubmit={handleJoin}>
               <FormGroup>
                 <InputGroup className="input-group-alternative mb-3">
                   <InputGroupAddon addonType="prepend">
@@ -90,7 +120,11 @@ const Register = () => {
                       <i className="ni ni-hat-3" />
                     </InputGroupText>
                   </InputGroupAddon>
-                  <Input placeholder="Name" type="text" />
+                  <Input
+                    placeholder="이름"
+                    type="text"
+                    onChange={(e) => setName(e.target.value)}
+                  />
                 </InputGroup>
               </FormGroup>
               <FormGroup>
@@ -101,9 +135,9 @@ const Register = () => {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
-                    placeholder="Email"
-                    type="email"
-                    autoComplete="new-email"
+                    placeholder="아이디"
+                    type="text"
+                    onChange={(e) => setId(e.target.value)}
                   />
                 </InputGroup>
               </FormGroup>
@@ -118,6 +152,7 @@ const Register = () => {
                     placeholder="Password"
                     type="password"
                     autoComplete="new-password"
+                    onChange={(e) => setPw(e.target.value)}
                   />
                 </InputGroup>
               </FormGroup>
@@ -128,7 +163,11 @@ const Register = () => {
                       <i className="ni ni-hat-3" />
                     </InputGroupText>
                   </InputGroupAddon>
-                  <Input placeholder="Name" type="text" />
+                  <Input
+                    placeholder="핸드폰"
+                    type="text"
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
                 </InputGroup>
               </FormGroup>
               <FormGroup>
@@ -138,7 +177,11 @@ const Register = () => {
                       <i className="ni ni-hat-3" />
                     </InputGroupText>
                   </InputGroupAddon>
-                  <Input placeholder="Name" type="text" />
+                  <Input
+                    placeholder="주민등록번호"
+                    type="text"
+                    onChange={(e) => setNum(e.target.value)}
+                  />
                 </InputGroup>
               </FormGroup>
 
@@ -171,7 +214,7 @@ const Register = () => {
                 </Col>
               </Row>
               <div className="text-center">
-                <Button className="mt-4" color="primary" type="button">
+                <Button className="mt-4" color="primary" type="submit">
                   Create account
                 </Button>
               </div>
