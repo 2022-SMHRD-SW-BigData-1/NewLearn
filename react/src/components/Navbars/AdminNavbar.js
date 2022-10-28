@@ -107,10 +107,6 @@ const AdminNavbar = (props) => {
                   <i className="ni ni-support-16" />
                   <span>Support</span>
                 </DropdownItem>
-                <DropdownItem to="/auth/login" tag={Link}>
-                  <i className="ni ni-support-16" />
-                  <span>로그인</span>
-                </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem
                   href="#pablo"

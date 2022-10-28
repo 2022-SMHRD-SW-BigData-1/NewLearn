@@ -24,6 +24,51 @@ let conn = mysql.createConnection({
 // });
 
 // View (React) => router로 데이터 보내기
+router.get("/board", function (req, res) {
+  let board = [];
+
+  let sql = "select * from t_board";
+  conn.query(sql, function (err, rows) {
+    if (!err) {
+      for (let i = 0; i < rows.length; i++) {
+        let seq = rows[i].board_seq;
+        let date = rows[i].board_date;
+        let title = rows[i].board_title;
+        let content = rows[i].board_content;
+        board.push({
+          seqs: seq,
+          dates: date,
+          titles: title,
+          contents: content,
+        });
+      }
+      res.json({
+        result: "success",
+        t_board: board,
+      });
+    } else {
+      res.json({ result: "false" });
+    }
+  });
+});
+router.post("/hosLogin", function (req, res) {
+  let id = req.body.id;
+  let pw = req.body.pw;
+  let sql = "select * from t_hospital where hosp_id = ? and hosp_pw =?";
+  conn.query(sql, [id, pw], function (err, rows) {
+    console.log("연결성공");
+    if (!err) {
+      console.log("아이디 찾기 완료");
+      let ids = rows[0].hosp_id;
+      let pws = rows[0].hosp_pw;
+      let nicks = rows[0].hosp_name;
+      res.json({ result: "success", id: ids, pw: pws, nick: nicks });
+    } else {
+      console.log(err);
+      res.json({ result: "False" });
+    }
+  });
+});
 router.post("/Login", function (req, res) {
   let id = req.body.id;
   let pw = req.body.pw;
@@ -42,6 +87,7 @@ router.post("/Login", function (req, res) {
     }
   });
 });
+
 router.post("/joinData", function (req, res) {
   let id = req.body.id;
   let pw = req.body.pw;
