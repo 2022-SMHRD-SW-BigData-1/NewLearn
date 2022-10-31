@@ -57,7 +57,7 @@ router.post("/hosLogin", function (req, res) {
   let sql = "select * from t_hospital where hosp_id = ? and hosp_pw =?";
   conn.query(sql, [id, pw], function (err, rows) {
     console.log("연결성공");
-    if (!err) {
+    if (rows.length > 0) {
       console.log("아이디 찾기 완료");
       let ids = rows[0].hosp_id;
       let pws = rows[0].hosp_pw;
@@ -75,7 +75,7 @@ router.post("/Login", function (req, res) {
   let sql = "select * from t_user where user_id = ? and user_pw =?";
   conn.query(sql, [id, pw], function (err, rows) {
     console.log("연결성공");
-    if (!err) {
+    if (rows.length > 0) {
       console.log("아이디 찾기 완료");
       let ids = rows[0].user_id;
       let pws = rows[0].user_pw;
