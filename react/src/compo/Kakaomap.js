@@ -9,6 +9,9 @@ const Map = () => {
   const [name, setNames] = useState([]);
   const [addr, setAddrs] = useState([]);
   const [ca, setCas] = useState([]);
+  let content = [];
+  let ma = [];
+  let markers = [];
 
   useEffect(() => {
     const mapContainer = document.getElementById("map");
@@ -19,6 +22,8 @@ const Map = () => {
     };
 
     map = new kakao.maps.Map(mapContainer, mapOption);
+  });
+  useEffect(() => {
     axios
       .get("http://127.0.0.1:3001/map", {})
       .then((res) => {
@@ -35,9 +40,6 @@ const Map = () => {
       });
   }, []);
   console.log(name[0]);
-  let content = [];
-  let ma = [];
-  let markers = [];
 
   for (let i = 0; i < name.length; i++) {
     content.push(
@@ -56,7 +58,7 @@ const Map = () => {
     );
     ma.push({ name: name[i], addr: addr[i], ca: ca[i], content: content[i] });
   }
-  console.log(ma);
+
   let geocoder = new kakao.maps.services.Geocoder();
 
   const geo = (i) => {
