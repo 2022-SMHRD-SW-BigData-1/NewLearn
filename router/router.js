@@ -107,6 +107,30 @@ router.post("/joinData", function (req, res) {
     }
   });
 });
+router.get("/map", function (req, res) {
+  let hos_name = [];
+  let hos_addr = [];
+  let hos_ca = [];
+  let sql = "select * from t_hospital";
+  conn.query(sql, function (err, rows) {
+    if (rows.length > 0) {
+      for (let i = 0; i < rows.length; i++) {
+        hos_name.push(rows[i].hosp_name);
+        hos_addr.push(rows[i].hosp_addr);
+        hos_ca.push(rows[i].hosp_category);
+      }
+      res.json({
+        result: "success",
+        name: hos_name,
+        addr: hos_addr,
+        ca: hos_ca,
+      });
+    } else {
+      console.log("데이터 오류");
+      res.json({ result: "false" });
+    }
+  });
+});
 
 router.get("*", function (request, response) {
   console.log("Happy Hacking!");
