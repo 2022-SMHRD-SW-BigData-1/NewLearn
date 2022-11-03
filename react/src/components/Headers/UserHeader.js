@@ -20,6 +20,7 @@
 import { Button, Container, Row, Col } from "reactstrap";
 
 const UserHeader = () => {
+  let user = JSON.parse(localStorage.getItem("user"));
   return (
     <>
       <div
@@ -29,7 +30,7 @@ const UserHeader = () => {
           backgroundImage:
             "url(" + require("../../assets/img/theme/profile-cover.jpg") + ")",
           backgroundSize: "cover",
-          backgroundPosition: "center top"
+          backgroundPosition: "center top",
         }}
       >
         {/* Mask */}
@@ -37,15 +38,14 @@ const UserHeader = () => {
         {/* Header container */}
         <Container className="d-flex align-items-center" fluid>
           <Row>
-            <Col lg="7" md="10">
-              <h1 className="display-2 text-white">Hello Jesse</h1>
+            <Col lg="10" md="10">
+              <h1 className="display-2 text-white">{user.nick}님</h1>
               <p className="text-white mt-0 mb-5">
-                This is your profile page. You can see the progress you've made
-                with your work and manage your projects or assigned tasks
+                NewLearn페이지에 오신걸 환영합니다.
               </p>
               <Button
                 color="info"
-                href="#pablo"
+                href="#tag1"
                 onClick={(e) => e.preventDefault()}
               >
                 Edit profile

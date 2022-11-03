@@ -1,5 +1,11 @@
 // reactstrap components
 import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import StoreImgList from "./ImgSlider";
+import Carousel from "react-bootstrap/Carousel";
+
 // 여기가 위에 네비 바들??
 const Header = () => {
   return (
@@ -9,7 +15,10 @@ const Header = () => {
         <Container fluid>
           <div className="header-body">
             <Row>
-              <img></img>
+              <h3>NEW LEARN</h3>
+            </Row>
+            <Row>
+              <StoreImgList></StoreImgList>
             </Row>
           </div>
         </Container>

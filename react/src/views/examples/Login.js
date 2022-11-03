@@ -49,7 +49,7 @@ const Login = () => {
           console.log(JSON.parse(localStorage.getItem("user")).nick);
           history.push("/admin");
         } else {
-          setModal(true);
+          alert("로그인 실패");
         }
       })
       .catch(() => {
@@ -72,6 +72,9 @@ const Login = () => {
                 id: res.data.id,
                 pw: res.data.pw,
                 nick: res.data.nick,
+                rn: res.data.rns,
+                phone: res.data.phones,
+                admin: res.data.admin,
               })
             );
           } catch (error) {
@@ -139,6 +142,7 @@ const Login = () => {
                       }}
                       placeholder="아이디"
                       type="text"
+                      required
                       // autoComplete="new-email"
                     />
                   </InputGroup>
@@ -157,6 +161,7 @@ const Login = () => {
                       placeholder="Password"
                       type="password"
                       autoComplete="new-password"
+                      required
                     />
                   </InputGroup>
                 </FormGroup>
@@ -167,13 +172,6 @@ const Login = () => {
                   </Button>
                 </div>
               </Form>
-              <Modal
-                isOpen={modals}
-                onRequestClose={() => setModal(false)}
-                className="loginFail"
-              >
-                로그인 실패
-              </Modal>
             </CardBody>
           </Card>
           <Row className="mt-3">

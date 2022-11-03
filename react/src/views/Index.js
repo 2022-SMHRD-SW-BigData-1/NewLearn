@@ -1,26 +1,7 @@
-/*!
-
-=========================================================
-* Argon Dashboard React - v1.2.2
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import { useState, useEffect } from "react";
-// node.js library that concatenates classes (strings)
-
-// reactstrap components
 import { CardHeader } from "reactstrap";
 import {
+  Button,
   Card,
   CardFooter,
   Media,
@@ -31,15 +12,18 @@ import {
   Container,
   Row,
   Badge,
+  Col,
 } from "reactstrap";
-
-// core components
 
 import Header from "components/Headers/Header.js";
 import axios from "axios";
+import Modal from "react-modal";
+import Write_board from "./examples/write_board";
+
 const Index = () => {
   const [board, setBoard] = useState([]);
-
+  const [modals, setModal] = useState(false);
+  let user = JSON.parse(localStorage.getItem("user"));
   useEffect(() => {
     axios
       .get("http://127.0.0.1:3001/board")
@@ -63,12 +47,32 @@ const Index = () => {
     <>
       <Header />
       {/* Page content */}
+
       <Container className="mt--7" fluid>
         <Row>
           <div className="col">
             <Card className="shadow">
               <CardHeader className="border-0">
-                <h3 className="mb-0">공지사항</h3>
+                <Row>
+                  <Col>
+                    <h2 className="mb-0">공지사항 </h2>
+                  </Col>
+
+                  {user ? (
+                    user.admin != "U" ? (
+                      <Col className="text-right" xs="4">
+                        <Button
+                          color="primary"
+                          href="#pablo"
+                          onClick={() => setModal(true)}
+                          size="sm"
+                        >
+                          게시글 작성
+                        </Button>
+                      </Col>
+                    ) : null
+                  ) : null}
+                </Row>
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
@@ -86,13 +90,14 @@ const Index = () => {
                     return (
                       <tr>
                         <td scope="col">{data.seqs}</td>
-
                         <td scope="col">{data.titles}</td>
                         <td scope="col" />
                         <td scope="col" />
                         <td scope="col">admin</td>
-
                         <td scope="col">{data.dates}</td>
+                        <td scope="col">
+                          <Button>삭제</Button>
+                        </td>
                       </tr>
                     );
                   })}
@@ -154,6 +159,13 @@ const Index = () => {
           </div>
         </Row>
       </Container>
+      <Modal
+        isOpen={modals}
+        onRequestClose={() => setModal(false)}
+        className="loginFail"
+      >
+        <Write_board setModal={setModal}></Write_board>
+      </Modal>
     </>
   );
 };

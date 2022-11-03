@@ -77,7 +77,7 @@ const Hos_Login = (props) => {
           console.log(JSON.parse(localStorage.getItem("user")).nick);
           history.push("/admin");
         } else {
-          setModal(true);
+          alert("로그인 실패");
         }
       })
       .catch(() => {
@@ -183,13 +183,6 @@ const Hos_Login = (props) => {
           </Col>
         </Row>
       </Col>
-      <Modal
-        className="loginFail"
-        isOpen={modals}
-        onRequestClose={() => setModal(false)}
-      >
-        로그인 실패
-      </Modal>
     </>
   );
 };

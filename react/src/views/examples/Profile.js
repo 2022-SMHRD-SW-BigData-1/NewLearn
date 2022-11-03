@@ -1,22 +1,3 @@
-/*!
-
-=========================================================
-* Argon Dashboard React - v1.2.2
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
-// reactstrap components
 import {
   Button,
   Card,
@@ -27,12 +8,13 @@ import {
   Input,
   Container,
   Row,
-  Col
+  Col,
 } from "reactstrap";
 // core components
 import UserHeader from "components/Headers/UserHeader.js";
 
 const Profile = () => {
+  let user = JSON.parse(localStorage.getItem("user"));
   return (
     <>
       <UserHeader />
@@ -130,7 +112,9 @@ const Profile = () => {
               <CardHeader className="bg-white border-0">
                 <Row className="align-items-center">
                   <Col xs="8">
-                    <h3 className="mb-0">My account</h3>
+                    <h3 className="mb-0" name="tag1">
+                      My account
+                    </h3>
                   </Col>
                   <Col className="text-right" xs="4">
                     <Button
