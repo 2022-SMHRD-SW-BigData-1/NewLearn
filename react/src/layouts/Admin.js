@@ -27,12 +27,13 @@ import Sidebar from "components/Sidebar/Sidebar.js";
 
 import routesF from "routes.js";
 import routesS from "routesF.js";
+import Board from "../views/examples/board.js";
 
 const Admin = (props) => {
   const mainContent = React.useRef();
   const location = useLocation();
   const [routes, setRoutes] = React.useState(routesF);
-
+  console.log(props.board);
   React.useEffect(() => {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
@@ -100,6 +101,7 @@ const Admin = (props) => {
         )}
 
         <Switch>
+          <Route path="/admin/board" render={(props) => <Board {...props} />} />
           {getRoutes(routes)}
           <Redirect from="*" to="/admin/index" />
         </Switch>

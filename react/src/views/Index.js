@@ -19,11 +19,17 @@ import Header from "components/Headers/Header.js";
 import axios from "axios";
 import Modal from "react-modal";
 import Write_board from "./examples/write_board";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const [board, setBoard] = useState([]);
   const [modals, setModal] = useState(false);
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
+
   let user = JSON.parse(localStorage.getItem("user"));
+
   useEffect(() => {
     axios
       .get("http://127.0.0.1:3001/board")
@@ -42,6 +48,24 @@ const Index = () => {
         console.log("데이터 보내기 실패");
       });
   }, []);
+  const board_dl = (seqs) => {
+    console.log(seqs);
+    axios
+      .post("http://127.0.0.1:3001/delete", {
+        seq: seqs,
+      })
+      .then((res) => {
+        if (res.data.result == "success") {
+          alert("삭제완료");
+          window.location.reload();
+        } else {
+          console.log("값이 안들어왔다!!");
+        }
+      })
+      .catch(() => {
+        console.log("데이터 보내기 실패");
+      });
+  };
 
   return (
     <>
@@ -83,20 +107,42 @@ const Index = () => {
                     <th scope="col" />
                     <th scope="col">작성자</th>
                     <th scope="col">작성날짜</th>
+                    <th />
                   </tr>
                 </thead>
                 <tbody>
-                  {board.map((data) => {
+                  {board.slice(offset, offset + limit).map((data, index) => {
                     return (
                       <tr>
-                        <td scope="col">{data.seqs}</td>
-                        <td scope="col">{data.titles}</td>
+                        <td scope="col">{index + 1}</td>
+                        <td scope="col">
+                          <Link
+                            to={{
+                              pathname: "/admin/board",
+                              state: {
+                                title: data.titles,
+                                content: data.contents,
+                                date: data.dates,
+                              },
+                            }}
+                          >
+                            {data.titles}
+                          </Link>
+                        </td>
                         <td scope="col" />
                         <td scope="col" />
                         <td scope="col">admin</td>
                         <td scope="col">{data.dates}</td>
-                        <td scope="col">
-                          <Button>삭제</Button>
+                        <td>
+                          {user ? (
+                            user.admin != "U" ? (
+                              <Col className="text-right" xs="4">
+                                <Button onClick={() => board_dl(data.seqs)}>
+                                  삭제
+                                </Button>
+                              </Col>
+                            ) : null
+                          ) : null}
                         </td>
                       </tr>
                     );
@@ -109,10 +155,14 @@ const Index = () => {
                     className="pagination justify-content-end mb-0"
                     listClassName="justify-content-end mb-0"
                   >
-                    <PaginationItem className="disabled">
+                    <PaginationItem>
                       <PaginationLink
                         href="#pablo"
-                        onClick={(e) => e.preventDefault()}
+                        onClick={(e) => {
+                          if (page != 1) {
+                            setPage(page - 1);
+                          }
+                        }}
                         tabIndex="-1"
                       >
                         <i className="fas fa-angle-left" />
@@ -146,7 +196,11 @@ const Index = () => {
                     <PaginationItem>
                       <PaginationLink
                         href="#pablo"
-                        onClick={(e) => e.preventDefault()}
+                        onClick={(e) => {
+                          if (page <= board.length / limit) {
+                            setPage(page + 1);
+                          }
+                        }}
                       >
                         <i className="fas fa-angle-right" />
                         <span className="sr-only">Next</span>

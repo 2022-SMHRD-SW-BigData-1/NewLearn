@@ -87,7 +87,21 @@ router.post("/Login", function (req, res) {
     }
   });
 });
-
+router.post("/delete", function (req, res) {
+  console.log(req.body.seq);
+  let seq = req.body.seq;
+  let sql = `delete from t_board where board_seq =${seq}`;
+  conn.query(sql, function (err, rows) {
+    if (!err) {
+      res.json({
+        result: "success",
+      });
+    } else {
+      console.log(err);
+      res.json({ result: "false" });
+    }
+  });
+});
 router.post("/joinData", function (req, res) {
   let id = req.body.id;
   let pw = req.body.pw;
@@ -104,6 +118,18 @@ router.post("/joinData", function (req, res) {
     } else {
       console.log(err);
       res.json({ result: "False" });
+    }
+  });
+});
+router.post("/SendBoard", function (req, res) {
+  let title = req.body.titles;
+  let contesnt = req.body.contents;
+  let sql = "insert into t_board(board_title,board_content) values(?,?)";
+  conn.query(sql, [title, contesnt], function (err, rows) {
+    if (!err) {
+      res.json({ result: "success" });
+    } else {
+      res.json({ result: "false" });
     }
   });
 });
