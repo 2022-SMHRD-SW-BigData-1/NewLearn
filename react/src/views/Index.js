@@ -20,6 +20,7 @@ import axios from "axios";
 import Modal from "react-modal";
 import Write_board from "./examples/write_board";
 import { Link } from "react-router-dom";
+import SimpleSlider from "compo/Carousel";
 
 const Index = () => {
   const [board, setBoard] = useState([]);
@@ -75,6 +76,8 @@ const Index = () => {
       <Container className="mt--7" fluid>
         <Row>
           <div className="col">
+            <SimpleSlider></SimpleSlider>
+            {/* <br /> */}
             <Card className="shadow">
               <CardHeader className="border-0">
                 <Row>

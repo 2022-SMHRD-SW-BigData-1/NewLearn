@@ -137,6 +137,7 @@ router.get("/map", function (req, res) {
   let hos_name = [];
   let hos_addr = [];
   let hos_ca = [];
+  let hos_tel = [];
   let sql = "select * from t_hospital";
   conn.query(sql, function (err, rows) {
     if (rows.length > 0) {
@@ -144,12 +145,14 @@ router.get("/map", function (req, res) {
         hos_name.push(rows[i].hosp_name);
         hos_addr.push(rows[i].hosp_addr);
         hos_ca.push(rows[i].hosp_category);
+        hos_tel.push(rows[i].hosp_tel);
       }
       res.json({
         result: "success",
         name: hos_name,
         addr: hos_addr,
         ca: hos_ca,
+        tel: hos_tel,
       });
     } else {
       console.log("데이터 오류");

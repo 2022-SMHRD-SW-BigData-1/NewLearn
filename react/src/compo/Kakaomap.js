@@ -1,36 +1,40 @@
 import React, { useEffect, useState } from "react";
 import "./Kakaomap.css";
+import Posts from "./Posts";
 import axios from "axios";
+import { FaListUl, FaSearch } from "react-icons/fa";
+import { BsListUl } from "react-icons/bs";
+
 /* global kakao */
 const Map = () => {
   const [cnt, setCnt] = useState(0);
   const { kakao } = window;
   let map;
-  const [name, setNames] = useState([]);
-  const [addr, setAddrs] = useState([]);
-  const [ca, setCas] = useState([]);
-  let content = [];
-  let ma = [];
-  let markers = [];
+  const [name, setName] = useState([]);
+  const [addr, setAddr] = useState([]);
+  const [ca, setCa] = useState([]);
+  const [tel, setTel] = useState([]);
 
   useEffect(() => {
     const mapContainer = document.getElementById("map");
 
     let mapOption = {
       center: new kakao.maps.LatLng(35.14962266596815, 126.92057654445857), //지도의 중심좌표.
-      level: 3, //지도의 레벨(확대, 축소 정도)
+      level: 4, //지도의 레벨(확대, 축소 정도)
     };
 
     map = new kakao.maps.Map(mapContainer, mapOption);
   });
+
   useEffect(() => {
     axios
       .get("http://127.0.0.1:3001/map", {})
       .then((res) => {
         if (res.data.result == "success") {
-          setNames(res.data.name);
-          setAddrs(res.data.addr);
-          setCas(res.data.ca);
+          setName(res.data.name);
+          setAddr(res.data.addr);
+          setCa(res.data.ca);
+          setTel(res.data.tel);
         } else {
           console.log("데이터베이스 오류");
         }
@@ -39,7 +43,10 @@ const Map = () => {
         console.log("데이터 보내기 실패");
       });
   }, []);
-  console.log(name[0]);
+
+  let content = [];
+  let ma = [];
+  let markers = [];
 
   for (let i = 0; i < name.length; i++) {
     content.push(
@@ -52,11 +59,17 @@ const Map = () => {
                     <td>${addr[i]}</td>
                 </tr>
                 <tr>
-                    <td colspan='2' align="center"><a href="http://localhost:3000/admin/index"><button> 예약하기</button></a></td>
+                    <td colspan='2' align="center">a</td>
                 </tr>
             </table>`
     );
-    ma.push({ name: name[i], addr: addr[i], ca: ca[i], content: content[i] });
+    ma.push({
+      name: name[i],
+      addr: addr[i],
+      ca: ca[i],
+      content: content[i],
+      tel: tel[i],
+    });
   }
 
   let geocoder = new kakao.maps.services.Geocoder();
@@ -138,15 +151,19 @@ const Map = () => {
     for (let i = 0; i < ma.length; i++) {
       if (se.value == ma[i].name && ca.value == ma[i].ca) {
         geo(i);
-      } else if (se.value == "") {
+      } else if (se.value == "" && ca.value == "전체") {
+        geo(i);
+      } else if (se.value == "" && ca.value == ma[i].ca) {
+        geo(i);
+      } else if (se.value == ma[i].name && ca.value == "전체") {
         geo(i);
       }
     }
     se.value = "";
+    ca.value = "전체";
   };
 
   if (cnt == 0) {
-    console.log(cnt);
     return (
       <div className="map_wrap">
         <div
@@ -156,17 +173,24 @@ const Map = () => {
             height: "600px",
             position: "relative",
             overflow: "hidden",
+            borderRadius: "10px",
           }}
         ></div>
         <div id="asd">
           <select id="category" name="ca" onChange={myFunction}>
             <option value="전체">카테고리</option>
             <option value="내과">내과</option>
+            <option value="비뇨기과">비뇨기과</option>
+            <option value="안과">안과</option>
+            <option value="외과">외과</option>
             <option value="이비인후과">이비인후과</option>
+            <option value="정형외과">정형외과</option>
+            <option value="치과">치과</option>
+            <option value="한의원">한의원</option>
           </select>
           <input id="search" placeholder="병원 검색" />
           <button id="submit" onClick={sear}>
-            <img />
+            <FaSearch size="25" />
           </button>
         </div>
 
@@ -176,10 +200,13 @@ const Map = () => {
             setCnt(1);
           }}
         >
-          <img />
+          <FaListUl size="30" />
         </button>
       </div>
     );
+  } else if (cnt == 1) {
+    console.log(cnt);
+    return <Posts setCnt={setCnt} ma={ma} />;
   }
 };
 

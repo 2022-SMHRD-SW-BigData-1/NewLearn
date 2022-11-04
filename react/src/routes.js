@@ -22,6 +22,7 @@ import Register from "views/examples/Register.js";
 import Login from "views/examples/Login.js";
 import Tables from "views/examples/Tables.js";
 import Icons from "views/examples/Icons.js";
+import Detail from "views/examples/Detail.js";
 
 var routes = [
   {
@@ -65,6 +66,13 @@ var routes = [
     icon: "ni ni-circle-08 text-pink",
     component: Register,
     layout: "/auth",
+  },
+  {
+    path: "/Detail",
+    name: "Detail",
+    icon: "ni ni-circle-08 text-pink",
+    component: Detail,
+    layout: "/admin",
   },
 ];
 
