@@ -1,0 +1,140 @@
+#wrap {
+  display: flex;
+  margin: auto;
+  padding: 0;
+  /* font-family:'Malgun Gothic',dotum,'돋움',sans-serif; */
+  /* font-size:12px; */
+  position: relative;
+  width: 90%;
+  height: 100%;
+  /* left: 5%; */
+
+  /* height:600px; */
+  background-color: whitesmoke;
+  border-radius: 10px;
+  flex-direction: column;
+}
+
+/* #wrap>div{
+    align-content: center;
+} */
+
+#titleHos {
+  display: block;
+  margin-top: 20px;
+}
+
+#searchAll {
+  display: block;
+  position: relative;
+  /* align-items: center; */
+  /* top: 10%; */
+  /* left: 25%; */
+  /* right: 0; */
+  width: 380px;
+  height: 50px;
+  background-color: rgb(255, 255, 255);
+  /* -webkit-box-shadow: 0 2px 1px 0 rgb(0 0 0 / 15%);
+    -moz-box-shadow: 0 2px 1px 0 rgba(0,0,0,.15); */
+  /* box-shadow: 0 2px 1px 0 rgb(0 0 0 / 15%); */
+  /* z-index: 2; */
+  border: 2px solid white;
+  border-radius: 10px;
+  margin: auto;
+}
+
+#optionHos {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  border-radius: 5px;
+  border: 1px solid #909090;
+  border: none;
+  /* box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4); */
+  background: rgb(255, 255, 255);
+  overflow: hidden;
+  z-index: 2;
+  width: 100px;
+  height: 30px;
+  size: "10";
+  font-size: 15px;
+}
+
+#searchHos {
+  position: absolute;
+  top: 8px;
+  left: 120px;
+  /* border:1px solid #909090; */
+  border: none;
+  /* background: transparent; */
+  /* box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4); */
+  /* background: rgb(255, 255, 255); */
+  overflow: hidden;
+  z-index: 2;
+  width: 200px;
+  height: 30px;
+  font-size: 15px;
+}
+
+#inputHos {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  /* border:1px solid #909090; */
+  border: none;
+  /* box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4); */
+  background: rgb(255, 255, 255);
+  overflow: hidden;
+  z-index: 2;
+  width: 40px;
+  height: 30px;
+  font-size: 15px;
+}
+
+#changeMap {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-radius: 10px;
+  border: 1px solid #909090;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+  background: rgb(255, 255, 255);
+  overflow: hidden;
+  z-index: 2;
+  width: 50px;
+  height: 50px;
+}
+
+.postCard {
+  position: relative;
+  display: inline-block;
+  width: 80%;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.postCard:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transform: scale(1.05);
+}
+
+.cardName {
+  padding-left: 40px;
+}
+
+.cardContent {
+  padding-left: 40px;
+  font-size: small;
+}
+
+.cardCategory {
+  font-size: medium;
+}
+
+.lineImo {
+  margin-bottom: 5px;
+}

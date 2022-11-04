@@ -76,7 +76,7 @@ const Index = () => {
       <Container className="mt--7" fluid>
         <Row>
           <div className="col">
-            <SimpleSlider></SimpleSlider>
+            {/* <SimpleSlider></SimpleSlider> */}
             {/* <br /> */}
             <Card className="shadow">
               <CardHeader className="border-0">
