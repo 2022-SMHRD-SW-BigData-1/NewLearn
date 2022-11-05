@@ -80,7 +80,20 @@ router.post("/Login", function (req, res) {
       let ids = rows[0].user_id;
       let pws = rows[0].user_pw;
       let nicks = rows[0].user_name;
-      res.json({ result: "success", id: ids, pw: pws, nick: nicks });
+      let phone = rows[0].user_phone;
+      let rn = rows[0].user_rn;
+      let join = rows[0].user_joindate;
+      let type = rows[0].user_type;
+      res.json({
+        result: "success",
+        id: ids,
+        pw: pws,
+        nick: nicks,
+        type: type,
+        rn: rn,
+        phone: phone,
+        join: join,
+      });
     } else {
       console.log(err);
       res.json({ result: "False" });

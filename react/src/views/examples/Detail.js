@@ -12,7 +12,7 @@ import logo from "../image/logo.jpg";
 import Review_btn from "./Review_btn";
 import dj1 from "../image/dj1.jpg";
 
-const Maps = () => {
+const Detail = () => {
   // const [hos_name, setHos_name] = useState("");
 
   return (
@@ -178,4 +178,4 @@ const Maps = () => {
   );
 };
 
-export default Maps;
+export default Detail;

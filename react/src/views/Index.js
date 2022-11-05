@@ -32,6 +32,7 @@ const Index = () => {
   let user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
+    console.log(user.admin);
     axios
       .get("http://127.0.0.1:3001/board")
       .then((res) => {

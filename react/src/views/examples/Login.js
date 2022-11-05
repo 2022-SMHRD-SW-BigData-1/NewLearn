@@ -41,6 +41,10 @@ const Login = () => {
                 id: res.data.id,
                 pw: res.data.pw,
                 nick: res.data.nick,
+                admin: res.data.type,
+                join: res.data.join,
+                rn: res.data.rn,
+                phone: res.data.phone,
               })
             );
           } catch (error) {
