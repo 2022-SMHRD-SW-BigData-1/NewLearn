@@ -30,7 +30,7 @@ const Example = () => {
         </tr>
 
         <tr>
-          {/* <td align="left" id="date1">
+          <td align="left" id="date1">
             <DatePicker
               // 한국어설정
               locale={ko}
@@ -47,7 +47,7 @@ const Example = () => {
               // 스크롤 하면 선택box 닫히게
               closeOnScroll={true}
             />
-          </td> */}
+          </td>
           <td>
             <button
               type="button"
@@ -62,7 +62,7 @@ const Example = () => {
                 document.querySelector("#date1>div>div>input").click();
               }}
             >
-              {/* <CalendarMonthIcon /> */}
+              <CalendarMonthIcon />
             </button>
           </td>
         </tr>
@@ -73,7 +73,7 @@ const Example = () => {
 
         <tr>
           <td id="date2">
-            {/* <DatePicker
+            <DatePicker
               locale={ko}
               dateFormat="h:mm aa"
               selected={startDate}
@@ -86,7 +86,7 @@ const Example = () => {
               filterTime={filterPassedTime}
               excludeTimes={[setHours(setMinutes(new Date(), 30), 12)]}
               closeOnScroll={true}
-            /> */}
+            />
           </td>
           <td>
             <button
@@ -102,13 +102,15 @@ const Example = () => {
                 document.querySelector("#date2>div>div>input").click();
               }}
             >
-              {/* <AccessTimeIcon /> */}
+              <AccessTimeIcon />
             </button>
           </td>
         </tr>
 
         <tr>
-          <td align={"center"}>{/* <Res_button /> */}</td>
+          <td align={"center"}>
+            <Res_button />
+          </td>
         </tr>
       </table>
     </form>
