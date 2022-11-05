@@ -129,7 +129,7 @@ function Posts(props) {
 
   const chSe = () => {
     let se = document.getElementById("searchHos");
-    let ca = document.getElementById("optionCategory");
+    let ca = document.getElementById("optionHos");
     console.log(se.value);
     console.log(ca.value);
     ma = [];

@@ -3,13 +3,13 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Carousel.css";
-import styled from "styled-components";
+// import styled from "styled-components";
 
-const StyledSlider = styled(Slider)`
-  height: 100%;
-  width: 100%;
-  position: relative;
-`;
+// const StyledSlider = styled(Slider)`
+//   height: 100%;
+//   width: 100%;
+//   position: relative;
+// `;
 
 export default class SimpleSlider extends Component {
   render() {
@@ -35,7 +35,7 @@ export default class SimpleSlider extends Component {
     };
     return (
       <div>
-        <StyledSlider {...settings}>
+        <Slider {...settings}>
           <div>
             <a href="https://www.naver.com/">
               <img
@@ -66,7 +66,7 @@ export default class SimpleSlider extends Component {
               />
             </a>
           </div>
-        </StyledSlider>
+        </Slider>
       </div>
     );
   }
