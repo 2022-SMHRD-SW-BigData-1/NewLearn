@@ -4,7 +4,9 @@ import Posts from "./Posts";
 import axios from "axios";
 import { FaListUl, FaSearch } from "react-icons/fa";
 import { BsListUl } from "react-icons/bs";
+import { te } from "date-fns/locale";
 
+import { Link } from "react-router-dom";
 /* global kakao */
 const Map = () => {
   const [cnt, setCnt] = useState(0);
@@ -48,6 +50,10 @@ const Map = () => {
   let ma = [];
   let markers = [];
 
+  const data1 = function () {
+    console.log("Test");
+  };
+
   for (let i = 0; i < name.length; i++) {
     content.push(
       `<table border="1px" style="width:300px;height:100px">
@@ -59,7 +65,9 @@ const Map = () => {
                     <td>${addr[i]}</td>
                 </tr>
                 <tr>
-                    <td colspan='2' align="center">a</td>
+                    <td colspan='2' align="center">  <button type='button' >
+                    <a href="http://localhost:3000/admin/Detail?title=${name[i]}"/>이동하기
+                    </button></td>
                 </tr>
             </table>`
     );

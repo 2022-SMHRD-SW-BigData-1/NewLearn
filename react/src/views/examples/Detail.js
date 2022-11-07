@@ -11,9 +11,15 @@ import "./kkkk.css";
 import logo from "../image/logo.jpg";
 import Review_btn from "./Review_btn";
 import dj1 from "../image/dj1.jpg";
+import { useEffect } from "react";
+// import { useSearchParams } from "react-router-dom";
 
 const Detail = () => {
   // const [hos_name, setHos_name] = useState("");
+  // const [searchParams, setSearchParams] = useSearchParams();
+  useEffect(() => {
+    console.log(window.location.search);
+  }, []);
 
   return (
     <>

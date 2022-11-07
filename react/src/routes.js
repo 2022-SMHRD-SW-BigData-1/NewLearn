@@ -67,13 +67,6 @@ var routes = [
     component: Register,
     layout: "/auth",
   },
-  {
-    path: "/Detail",
-    name: "Detail",
-    icon: "ni ni-circle-08 text-pink",
-    component: Detail,
-    layout: "/admin",
-  },
 ];
 
 export default routes;

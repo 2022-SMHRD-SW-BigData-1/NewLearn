@@ -11,6 +11,7 @@ import Main from "../views/Index";
 import routesF from "routes.js";
 import routesS from "routesF.js";
 import Board from "../views/examples/board.js";
+import Detail from "views/examples/Detail";
 
 const Admin = (props) => {
   const mainContent = React.useRef();
@@ -85,6 +86,10 @@ const Admin = (props) => {
 
         <Switch>
           <Route path="/admin/board" render={(props) => <Board {...props} />} />
+          <Route
+            path="/admin/Detail"
+            render={(props) => <Detail {...props} />}
+          />
           {getRoutes(routes)}
           <Redirect from="*" to="/admin/index" />
         </Switch>
