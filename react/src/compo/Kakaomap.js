@@ -66,7 +66,7 @@ const Map = () => {
                 </tr>
                 <tr>
                     <td colspan='2' align="center">  <button type='button' >
-                    <a href="http://localhost:3000/admin/Detail?title=${name[i]}"/>이동하기
+                    <a href="http://localhost:3000/admin/Detail?title=${name[i]}&addr=${addr[i]}&ca=${ca[i]}&tel=${tel[i]}"/>이동하기
                     </button></td>
                 </tr>
             </table>`

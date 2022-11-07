@@ -2,11 +2,9 @@
   width: 90%;
   left: 5%;
 }
-
 .mt--7 {
   background-color: whitesmoke;
 }
-
 .card_b {
   width: 100%;
   height: 100%;
@@ -14,7 +12,6 @@
   padding: 0;
   border: 0;
 }
-
 .card_c {
   width: 89.5%;
   height: 100%;
@@ -22,28 +19,24 @@
   padding: 0;
   border: 0;
 }
-
 .card_d,
 .card_e {
   width: 90%;
   margin: 0 0 0 5%;
 }
-
 .info,
 .reser {
   margin: 5% 0 5% 10.5%;
 }
-
 .info_txt {
   line-height: 1.5;
   font-size: large;
 }
-
 .review,
-.map_info {
+.map_info,
+.review_txt {
   margin: 5% 0 5% 5%;
 }
-
 .main_name {
   width: 740px;
   height: 200px;
@@ -53,20 +46,18 @@
   align-content: center;
   text-align: center;
   margin: auto;
+  position: relative;
 }
-
 .detail {
   width: 800;
   height: 244.5;
   align-items: center;
 }
-
 .inner_place {
   width: 744;
   height: 240.5;
   align-items: center;
 }
-
 .small_tit {
   width: 744;
   height: 26.5;
@@ -74,7 +65,6 @@
   margin: 0;
   color: rgb(61, 61, 61);
 }
-
 .tit {
   width: 744;
   height: 80;
@@ -84,13 +74,11 @@
   color: black;
   margin: 0 0 5% 0;
 }
-
 .menu {
   list-style: none;
   margin: 0 0 0 8%;
   text-align: center;
 }
-
 .bnt {
   float: left;
   width: 100px;
@@ -98,7 +86,6 @@
   margin-left: 30px;
   padding: 0;
 }
-
 .logo {
   width: 99%;
   height: 10%;
@@ -106,16 +93,9 @@
   margin: 0.5%;
   position: relative;
 }
-
 .hos_pic {
   width: 50%;
 }
-
-/* .separate2{
-    padding: 0;
-    margin: 0;
-} */
-
 .review_input {
   display: inline-block;
   width: 88.5%;
@@ -123,4 +103,8 @@
   resize: none;
   border-style: bold;
   border-radius: 10px;
+}
+.rv_user {
+  font-size: large;
+  color: black;
 }

@@ -30,23 +30,27 @@ function Posts(props) {
         if ((index + 1) % 3 == 1) {
           return (
             <>
-              <Card key={data.name} className="postCard">
-                <div>
-                  <h2 className="cardName">
-                    {data.name}
-                    <br />
-                    <span className="cardCategory">
-                      <TbMinusVertical size="25" className="lineImo" />
-                      {data.ca}
-                    </span>
-                  </h2>
-                  <div className="cardContent">
-                    <RiMapPinLine size="5%" /> {data.addr}
-                    <br />
-                    <RiPhoneLine size="5%" /> {data.tel}
+              <a
+                href={`http://localhost:3000/admin/Detail?title=${data.name}&addr=${data.addr}&ca=${data.ca}&tel=${data.tel}`}
+              >
+                <Card key={data.name} className="postCard">
+                  <div>
+                    <h2 className="cardName">
+                      {data.name}
+                      <br />
+                      <span className="cardCategory">
+                        <TbMinusVertical size="25" className="lineImo" />
+                        {data.ca}
+                      </span>
+                    </h2>
+                    <div className="cardContent">
+                      <RiMapPinLine size="5%" /> {data.addr}
+                      <br />
+                      <RiPhoneLine size="5%" /> {data.tel}
+                    </div>
                   </div>
-                </div>
-              </Card>
+                </Card>
+              </a>
               <br />
             </>
           );
@@ -58,23 +62,27 @@ function Posts(props) {
         if ((index + 1) % 3 == 2) {
           return (
             <>
-              <Card key={data.name} className="postCard">
-                <div>
-                  <h2 className="cardName">
-                    {data.name}
-                    <br />
-                    <span className="cardCategory">
-                      <TbMinusVertical size="25" className="lineImo" />
-                      {data.ca}
-                    </span>
-                  </h2>
-                  <div className="cardContent">
-                    <RiMapPinLine size="5%" /> {data.addr}
-                    <br />
-                    <RiPhoneLine size="5%" /> {data.tel}
+              <a
+                href={`http://localhost:3000/admin/Detail?title=${data.name}&addr=${data.addr}&ca=${data.ca}&tel=${data.tel}`}
+              >
+                <Card key={data.name} className="postCard">
+                  <div>
+                    <h2 className="cardName">
+                      {data.name}
+                      <br />
+                      <span className="cardCategory">
+                        <TbMinusVertical size="25" className="lineImo" />
+                        {data.ca}
+                      </span>
+                    </h2>
+                    <div className="cardContent">
+                      <RiMapPinLine size="5%" /> {data.addr}
+                      <br />
+                      <RiPhoneLine size="5%" /> {data.tel}
+                    </div>
                   </div>
-                </div>
-              </Card>
+                </Card>
+              </a>
               <br />
             </>
           );
@@ -86,23 +94,27 @@ function Posts(props) {
         if ((index + 1) % 3 == 0) {
           return (
             <>
-              <Card key={data.name} className="postCard">
-                <div>
-                  <h2 className="cardName">
-                    {data.name}
-                    <br />
-                    <span className="cardCategory">
-                      <TbMinusVertical size="25" className="lineImo" />
-                      {data.ca}
-                    </span>
-                  </h2>
-                  <div className="cardContent">
-                    <RiMapPinLine size="5%" /> {data.addr}
-                    <br />
-                    <RiPhoneLine size="5%" /> {data.tel}
+              <a
+                href={`http://localhost:3000/admin/Detail?title=${data.name}&addr=${data.addr}&ca=${data.ca}&tel=${data.tel}`}
+              >
+                <Card key={data.name} className="postCard">
+                  <div>
+                    <h2 className="cardName">
+                      {data.name}
+                      <br />
+                      <span className="cardCategory">
+                        <TbMinusVertical size="25" className="lineImo" />
+                        {data.ca}
+                      </span>
+                    </h2>
+                    <div className="cardContent">
+                      <RiMapPinLine size="5%" /> {data.addr}
+                      <br />
+                      <RiPhoneLine size="5%" /> {data.tel}
+                    </div>
                   </div>
-                </div>
-              </Card>
+                </Card>
+              </a>
               <br />
             </>
           );

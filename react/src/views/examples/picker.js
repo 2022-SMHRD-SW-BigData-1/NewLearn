@@ -6,14 +6,19 @@ import setMinutes from "date-fns/setMinutes";
 import Res_button from "./Res_button";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
+// import * as React from "react";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
 
 // CSS Modules, react-datepicker-cssmodules.css
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
-const Example = () => {
+const Example = (props) => {
   const [startDate, setStartDate] = useState(new Date());
+  const history = useHistory();
 
   const filterPassedTime = (time) => {
     const currentDate = new Date();
@@ -21,9 +26,32 @@ const Example = () => {
 
     return currentDate.getTime() < selectedDate.getTime();
   };
-
+  const send_r = (e) => {
+    if (!props.user_id) {
+      alert("로그인 부탁드립니다.");
+      history.push("/auth");
+    } else {
+      axios
+        .post("http://127.0.0.1:3001/send_r", {
+          hosp_num: props.hosp_num,
+          id: props.user_id,
+          date: startDate,
+        })
+        .then((res) => {
+          if (res.data.result == "success") {
+            alert("예약성공");
+            history.push("/admin");
+          } else {
+            alert("이미 예약된 시간입니다.");
+          }
+        })
+        .catch(() => {
+          console.log("예약 오류남");
+        });
+    }
+  };
   return (
-    <form>
+    <form onSubmit={send_r}>
       <table>
         <tr>
           <td align="right"> - 원하는 날짜를 선택해주세요</td>
@@ -39,7 +67,9 @@ const Example = () => {
               // 처음에 맨 위에 표시된 input에 나오는게 지금 날짜
               selected={startDate}
               // 내가 선택한 날짜가 맨 위에 표시 됨
-              onChange={(date) => setStartDate(date)}
+              onChange={(date) => {
+                setStartDate(date);
+              }}
               selectsStart
               // 이전 날짜 선택 불가능
               minDate={new Date()}
@@ -77,7 +107,9 @@ const Example = () => {
               locale={ko}
               dateFormat="h:mm aa"
               selected={startDate}
-              onChange={(date) => setStartDate(date)}
+              onChange={(date) => {
+                setStartDate(date);
+              }}
               minTime={setHours(setMinutes(new Date(), 0), 9)}
               showTimeSelect
               showTimeSelectOnly
@@ -109,7 +141,16 @@ const Example = () => {
 
         <tr>
           <td align={"center"}>
-            <Res_button />
+            {/* <Stack direction="row" spacing={2}>
+              <Button
+                variant="contained"
+                style={{ position: "relative", left: "81%" }}
+                type="submit"
+              >
+                저장하기
+              </Button>
+            </Stack> */}
+            <button type="submit">예약</button>
           </td>
         </tr>
       </table>

@@ -72,7 +72,8 @@ router.post("/hosLogin", function (req, res) {
 router.post("/Login", function (req, res) {
   let id = req.body.id;
   let pw = req.body.pw;
-  let sql = "select * from t_user where user_id = ? and user_pw =?";
+  let sql =
+    "select user_id, user_name, user_rn, user_phone, date_format(user_joindate, '%Y년 %m월 %d일') user_joindate, user_type, user_addr from t_user where user_id = ? and user_pw =?";
   conn.query(sql, [id, pw], function (err, rows) {
     console.log("연결성공");
     if (rows.length > 0) {
@@ -84,6 +85,7 @@ router.post("/Login", function (req, res) {
       let rn = rows[0].user_rn;
       let join = rows[0].user_joindate;
       let type = rows[0].user_type;
+      let addr = rows[0].user_addr;
       res.json({
         result: "success",
         id: ids,
@@ -93,6 +95,7 @@ router.post("/Login", function (req, res) {
         rn: rn,
         phone: phone,
         join: join,
+        addr: addr,
       });
     } else {
       console.log(err);
@@ -170,6 +173,45 @@ router.get("/map", function (req, res) {
     } else {
       console.log("데이터 오류");
       res.json({ result: "false" });
+    }
+  });
+});
+
+router.post("/getnum", function (req, res) {
+  let names = req.body.names;
+  let addr = req.body.addr;
+  let sql =
+    "select hosp_num from t_hospital where hosp_name = ? and hosp_addr = ?";
+  conn.query(sql, [names, addr], function (err, rows) {
+    if (!err) {
+      res.json({ result: "success", num: rows[0].hosp_num });
+    } else {
+      res.json({ result: "false" });
+    }
+  });
+});
+router.post("/send_r", function (req, res) {
+  console.log(req.body);
+  let nums = req.body.hosp_num;
+  let id = req.body.id;
+  let date = req.body.date;
+  let sql1 =
+    "select * from t_reservation where hosp_num = ? and reserv_time =?";
+  let sql2 =
+    "insert into t_reservation(user_id,hosp_num,reserv_time) values(?,?,?)";
+
+  conn.query(sql1, [nums, date], function (err1, rows1) {
+    if (!err1) {
+      conn.query(sql2, [id, nums, date], function (err2, rows2) {
+        if (!err2) {
+          res.json({ result: "success" });
+        } else {
+          console.log(err2);
+          res.json({ result: "false" });
+        }
+      });
+    } else {
+      console.log(err1);
     }
   });
 });

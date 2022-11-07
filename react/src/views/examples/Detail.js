@@ -11,15 +11,32 @@ import "./kkkk.css";
 import logo from "../image/logo.jpg";
 import Review_btn from "./Review_btn";
 import dj1 from "../image/dj1.jpg";
-import { useEffect } from "react";
-// import { useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useUrlSearchParams } from "use-url-search-params";
+import axios from "axios";
 
 const Detail = () => {
-  // const [hos_name, setHos_name] = useState("");
-  // const [searchParams, setSearchParams] = useSearchParams();
+  const [params, setParams] = useUrlSearchParams({ checked: true });
+  const [num, setNum] = useState("");
+  let user = JSON.parse(localStorage.getItem("user"));
   useEffect(() => {
-    console.log(window.location.search);
-  }, []);
+    axios
+      .post("http://127.0.0.1:3001/getnum", {
+        names: params.title,
+        addr: params.addr,
+      })
+      .then((res) => {
+        if (res.data.result == "success") {
+          setNum(res.data.num);
+        } else {
+          console.log("오류 발생");
+        }
+      })
+      .catch(() => {
+        console.log("데이터 보내기 실패");
+      });
+    console.log(params);
+  }, [params.checked]);
 
   return (
     <>
@@ -34,8 +51,8 @@ const Detail = () => {
                   <img className="logo" src={logo} />
 
                   <div className="main_name">
-                    <p className="small_tit">Dae-Jung Hospital</p>
-                    <p className="tit">대중병원</p>
+                    <p className="small_tit">{params.title}</p>
+                    <p className="tit">{params.title}</p>
 
                     <ul className="menu">
                       <li className="bnt">
@@ -88,10 +105,7 @@ const Detail = () => {
                 </h1>
                 <div>
                   <h4 className="ni ni-pin-3">
-                    <span className="info_txt">
-                      {" "}
-                      광주광역시 동구 대인동 180
-                    </span>
+                    <span className="info_txt"> {params.addr}</span>
                   </h4>
                 </div>
 
@@ -112,7 +126,7 @@ const Detail = () => {
 
                 <div>
                   <h4 className="ni ni-mobile-button">
-                    <span className="info_txt"> 062 - 266 - 8080</span>
+                    <span className="info_txt">{params.tel}</span>
                   </h4>
                 </div>
               </div>
@@ -138,7 +152,7 @@ const Detail = () => {
                 <br></br>
                 <br></br>
                 <h1>예약하기</h1>
-                <Example />
+                <Example hosp_num={num} user_id={user.id}></Example>
               </div>
             </Card>
           </Col>
@@ -165,11 +179,30 @@ const Detail = () => {
                   placeholder="리뷰를 작성해주세요.(300자)"
                   maxLength={"300"}
                 ></textarea>
+                <Review_btn />
+              </div>
+              <div className="review_txt">
+                <h1>전체</h1>
+                <div className="review_list">
+                  <ul>
+                    <li>
+                      <div className="rv_user">
+                        <span className="user_name">작성자명 | </span>
+                        <span className="date_write">작성날짜 : </span>
+                        <span className="date_write">2022.11.01</span>
+                      </div>
+                      <div className="comment">
+                        <p className="txt_comment">
+                          <span>너무 좋습니다.</span>
+                        </p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </Card>
           </Col>
         </Row>
-
         <Row>
           <Col>
             <Card className="card_e">
@@ -183,5 +216,4 @@ const Detail = () => {
     </>
   );
 };
-
 export default Detail;
