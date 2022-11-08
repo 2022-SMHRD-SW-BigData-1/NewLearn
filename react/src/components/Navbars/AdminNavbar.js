@@ -93,7 +93,7 @@ const AdminNavbar = (props) => {
                 </DropdownItem>
                 <DropdownItem to="/admin/user-profile" tag={Link}>
                   <i className="ni ni-single-02" />
-                  <span>My profile</span>
+                  <span>마이페이지</span>
                 </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem
@@ -107,7 +107,7 @@ const AdminNavbar = (props) => {
                   }
                 >
                   <i className="ni ni-user-run" />
-                  <span>Logout</span>
+                  <span>로그아웃</span>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>

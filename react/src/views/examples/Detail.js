@@ -1,7 +1,7 @@
 import React from "react";
 
 // reactstrap components
-import { Card, Container, Row, Col } from "reactstrap";
+import { Card, Container, Row, Col, Button } from "reactstrap";
 
 // core components
 import Header from "components/Headers/Header.js";
@@ -9,18 +9,20 @@ import Example from "./picker";
 
 import "./kkkk.css";
 import logo from "../image/logo.jpg";
-import Review_btn from "./Review_btn";
 import dj1 from "../image/dj1.jpg";
 import { useEffect, useState } from "react";
 import { useUrlSearchParams } from "use-url-search-params";
 import axios from "axios";
 import Detailmap from "compo/Detailmap";
+import { useHistory } from "react-router-dom";
 
 const Detail = () => {
   const [params, setParams] = useUrlSearchParams({ checked: true });
   const [num, setNum] = useState("");
   const [rv, setRv] = useState([]);
   let user = JSON.parse(localStorage.getItem("user"));
+  const [textrv, setTextRv] = useState("");
+  const history = useHistory();
 
   // 리뷰 데이터
   useEffect(() => {
@@ -44,22 +46,37 @@ const Detail = () => {
         console.log("데이터 보내기 실패");
       });
     console.log("리뷰 우스");
-    // axios
-    //   .post("http://127.0.0.1:3001/getrv", {
-    //     num: num,
-    //   })
-    //   .then((res) => {
-    //     if (res.data.result == "success") {
-    //       setRv(res.data.rv_list);
-    //       console.log(rv);
-    //     } else {
-    //       console.log("오류 발생");
-    //     }
-    //   })
-    //   .catch(() => {
-    //     console.log("데이터 보내기 실패");
-    //   });
   }, [num]);
+
+  const send_rv = (e) => {
+    e.preventDefault();
+    if (user) {
+      axios
+        .post("http://127.0.0.1:3001/getrv", {
+          area: textrv,
+          id: user.id,
+          num: num,
+        })
+        .then((res) => {
+          if (res.data.result == "success") {
+            alert("리뷰작성 성공");
+            window.location.reload();
+          } else if (res.data.result == "dont") {
+            alert(
+              "예약을 하신 사람들만 사용하실수 있습니다."
+            ).window.location.reload();
+          } else {
+            console.log("오류발생");
+          }
+        })
+        .catch(() => {
+          console.log("데이터 보내기 실패");
+        });
+    } else {
+      alert("로그인 부탁드립니다.");
+      history.push("/auth");
+    }
+  };
 
   return (
     <>
@@ -197,15 +214,25 @@ const Detail = () => {
 
         <Row>
           <Col>
+            {/* 리뷰 작성 부분 */}
             <Card className="card_d">
               <div id="review_id" className="review">
                 <h1>리뷰</h1>
-                <textarea
-                  className="review_input"
-                  placeholder="리뷰를 작성해주세요.(300자)"
-                  maxLength={"300"}
-                ></textarea>
-                <Review_btn />
+                <form onSubmit={send_rv}>
+                  <textarea
+                    className="review_input"
+                    placeholder="리뷰를 작성해주세요.(300자)"
+                    maxLength={"300"}
+                    onChange={(e) => setTextRv(e.target.value)}
+                  ></textarea>
+                  <Button
+                    variant="contained"
+                    style={{ position: "relative" }}
+                    type="submit"
+                  >
+                    저장하기
+                  </Button>
+                </form>
               </div>
               <div className="review_txt">
                 <h1>전체</h1>

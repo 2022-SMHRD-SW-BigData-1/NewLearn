@@ -72,21 +72,24 @@ router.post("/hosLogin", function (req, res) {
 
 router.post("/getrv", function (req, res) {
   let num = req.body.num;
-  let users = [];
-  let contents = [];
-  let date = [];
-  let sql = "select * from t_review where hosp_num = ?";
-  conn.query(sql, [num], function (err, rows) {
-    if (!err) {
-      for (let i = 0; i < rows.length; i++) {
-        users.push(rows[i].user_id);
-        contents.push(rows[i].rv_content);
-        date.push(rows[i].rv_date);
-      }
-
-      res.json({ result: "success", rv_list: rows });
-    } else {
+  let id = req.body.id;
+  let area = req.body.area;
+  let sql = "select * from  t_reservation where hosp_num = ? and user_id = ?";
+  let sql2 = "insert into t_review(user_id,hosp_num,rv_content) values(?,?,?) ";
+  conn.query(sql, [num, id], function (err, rows) {
+    if (err) {
+      console.log(err);
       res.json({ result: "false" });
+    } else if (rows.length > 0) {
+      res.json({ result: "dont" });
+    } else {
+      conn.query(sql2, [id, num, area], function (err2, rows2) {
+        if (!err2) {
+          res.json({ result: "success" });
+        } else {
+          res.json({ result: "false" });
+        }
+      });
     }
   });
 });
