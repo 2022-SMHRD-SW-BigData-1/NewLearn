@@ -262,6 +262,45 @@ router.post("/send_r", function (req, res) {
   });
 });
 
+// 마이 프로필 삭제
+router.post("/reservation", function (req, res) {
+  let id = req.body.id;
+  console.log(id);
+  let hos_name = [];
+  let hos_ca = [];
+  let reserv_date = [];
+  let reserv_time = [];
+  let real_reserv = [];
+  let sql = `select h.hosp_name,h.hosp_category, date_format(r.reserv_time, '%Y년 %m월 %d일') date, date_format(r.reserv_time, '%H시 %i분') time, reserv_time
+  from t_hospital h, t_reservation r
+  where h.hosp_num=r.hosp_num
+  and r.user_id=?
+  order by reserv_time desc`;
+  conn.query(sql, [id], function (err, rows) {
+    if (rows.length > 0) {
+      for (let i = 0; i < rows.length; i++) {
+        hos_name.push(rows[i].hosp_name);
+        hos_ca.push(rows[i].hosp_category);
+        reserv_date.push(rows[i].date);
+        reserv_time.push(rows[i].time);
+        real_reserv.push(rows[i].reserv_time);
+      }
+      res.json({
+        result: "success",
+        hName: hos_name,
+        hCa: hos_ca,
+        rDate: reserv_date,
+        rTime: reserv_time,
+        rRtime: real_reserv,
+      });
+    } else {
+      console.log(err);
+      console.log("데이터 오류");
+      res.json({ result: "false" });
+    }
+  });
+});
+
 router.post("/reservation", function (req, res) {
   // let user = JSON.parse(localStorage.getItem("user"));
   // req.body.id

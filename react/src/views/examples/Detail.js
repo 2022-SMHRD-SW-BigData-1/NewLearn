@@ -1,7 +1,7 @@
 import React from "react";
 
 // reactstrap components
-import { Card, Container, Row, Col, Button } from "reactstrap";
+import { Card, Container, Row, Col } from "reactstrap";
 
 // core components
 import Header from "components/Headers/Header.js";
@@ -15,6 +15,8 @@ import { useUrlSearchParams } from "use-url-search-params";
 import axios from "axios";
 import Detailmap from "compo/Detailmap";
 import { useHistory } from "react-router-dom";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
 
 const Detail = () => {
   const [params, setParams] = useUrlSearchParams({ checked: true });
@@ -228,13 +230,15 @@ const Detail = () => {
                     maxLength={"300"}
                     onChange={(e) => setTextRv(e.target.value)}
                   ></textarea>
-                  <Button
-                    variant="contained"
-                    style={{ position: "relative" }}
-                    type="submit"
-                  >
-                    저장하기
-                  </Button>
+                  <Stack direction="row" spacing={2}>
+                    <Button
+                      variant="contained"
+                      style={{ position: "relative", left: "81%" }}
+                      type="submit"
+                    >
+                      저장하기
+                    </Button>
+                  </Stack>
                 </form>
               </div>
               <div className="review_txt">
@@ -247,10 +251,10 @@ const Detail = () => {
                         <li>
                           <div className="rv_user">
                             <span className="user_name">
-                              작성자명 | {data.user_id}
+                              작성자명 {data.user_id}
                             </span>
                             <span> </span>
-                            <span className="date_write">작성날짜 : </span>
+                            <span className="date_write"> | 작성날짜 : </span>
                             <span className="date_write">{data.rv_date}</span>
                           </div>
                           <div className="comment">

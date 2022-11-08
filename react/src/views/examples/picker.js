@@ -10,6 +10,8 @@ import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
 import "moment/locale/ko";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
 
 const Example = (props) => {
   const [startDate, setStartDate] = useState(new Date());
@@ -138,16 +140,14 @@ const Example = (props) => {
 
         <tr>
           <td align={"center"}>
-            {/* <Stack direction="row" spacing={2}>
+            <Stack direction="row" spacing={2}>
               <Button
                 variant="contained"
-                style={{ position: "relative", left: "81%" }}
-                type="submit"
+                style={{ position: "relative", left: "30%", top: "10px" }}
               >
-                저장하기
+                예약하기
               </Button>
-            </Stack> */}
-            <button type="submit">예약</button>
+            </Stack>
           </td>
         </tr>
       </table>
