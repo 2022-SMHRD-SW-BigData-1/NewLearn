@@ -244,7 +244,7 @@ router.post("/send_r", function (req, res) {
 
   conn.query(sql1, [nums, date], function (err1, rows1) {
     if (!err1) {
-      if (rows1.length > 0) {
+      if (rows1.length === 0) {
         conn.query(sql2, [id, nums, date], function (err2, rows2) {
           if (!err2) {
             res.json({ result: "success" });
