@@ -12,7 +12,8 @@ import "react-datepicker/dist/react-datepicker.css";
 // import * as React from "react";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-
+import moment from "moment";
+import "moment/locale/ko";
 // CSS Modules, react-datepicker-cssmodules.css
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
@@ -27,6 +28,8 @@ const Example = (props) => {
     return currentDate.getTime() < selectedDate.getTime();
   };
   const send_r = (e) => {
+    e.preventDefault();
+    var s_date = moment(startDate).format("YYYY-MM-DD HH:mm:ss");
     if (!props.user_id) {
       alert("로그인 부탁드립니다.");
       history.push("/auth");
@@ -35,7 +38,7 @@ const Example = (props) => {
         .post("http://127.0.0.1:3001/send_r", {
           hosp_num: props.hosp_num,
           id: props.user_id,
-          date: startDate,
+          date: s_date,
         })
         .then((res) => {
           if (res.data.result == "success") {

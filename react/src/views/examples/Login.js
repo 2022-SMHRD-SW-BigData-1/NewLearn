@@ -45,6 +45,7 @@ const Login = () => {
                 join: res.data.join,
                 rn: res.data.rn,
                 phone: res.data.phone,
+                addr: res.data.addr,
               })
             );
           } catch (error) {

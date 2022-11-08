@@ -10,9 +10,7 @@ const Header = () => {
         <Container fluid>
           <span className="mask bg-gradient-default opacity-8" />
           <div className="header-body">
-            <Row>
-              <h3>NEW LEARN</h3>
-            </Row>
+            <Row></Row>
             <Row></Row>
           </div>
         </Container>

@@ -43,13 +43,6 @@ const UserHeader = () => {
               <p className="text-white mt-0 mb-5">
                 NewLearn페이지에 오신걸 환영합니다.
               </p>
-              <Button
-                color="info"
-                href="#tag1"
-                onClick={(e) => e.preventDefault()}
-              >
-                Edit profile
-              </Button>
             </Col>
           </Row>
         </Container>

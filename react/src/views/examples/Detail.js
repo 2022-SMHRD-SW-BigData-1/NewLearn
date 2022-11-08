@@ -14,12 +14,17 @@ import dj1 from "../image/dj1.jpg";
 import { useEffect, useState } from "react";
 import { useUrlSearchParams } from "use-url-search-params";
 import axios from "axios";
+import Detailmap from "compo/Detailmap";
 
 const Detail = () => {
   const [params, setParams] = useUrlSearchParams({ checked: true });
   const [num, setNum] = useState("");
+  const [rv, setRv] = useState([]);
   let user = JSON.parse(localStorage.getItem("user"));
+
+  // 리뷰 데이터
   useEffect(() => {
+    console.log("병원 우스");
     axios
       .post("http://127.0.0.1:3001/getnum", {
         names: params.title,
@@ -28,6 +33,9 @@ const Detail = () => {
       .then((res) => {
         if (res.data.result == "success") {
           setNum(res.data.num);
+          setRv(res.data.rv_list);
+
+          console.log(rv);
         } else {
           console.log("오류 발생");
         }
@@ -35,8 +43,23 @@ const Detail = () => {
       .catch(() => {
         console.log("데이터 보내기 실패");
       });
-    console.log(params);
-  }, [params.checked]);
+    console.log("리뷰 우스");
+    // axios
+    //   .post("http://127.0.0.1:3001/getrv", {
+    //     num: num,
+    //   })
+    //   .then((res) => {
+    //     if (res.data.result == "success") {
+    //       setRv(res.data.rv_list);
+    //       console.log(rv);
+    //     } else {
+    //       console.log("오류 발생");
+    //     }
+    //   })
+    //   .catch(() => {
+    //     console.log("데이터 보내기 실패");
+    //   });
+  }, [num]);
 
   return (
     <>
@@ -51,7 +74,10 @@ const Detail = () => {
                   <img className="logo" src={logo} />
 
                   <div className="main_name">
-                    <p className="small_tit">{params.title}</p>
+                    <p className="small_tit">
+                      {params.title}
+                      {num}
+                    </p>
                     <p className="tit">{params.title}</p>
 
                     <ul className="menu">
@@ -80,7 +106,7 @@ const Detail = () => {
                       </li>
 
                       <li className="bnt">
-                        <a href="#" style={{ color: "#545A71" }}>
+                        <a href="#maps" style={{ color: "#545A71" }}>
                           <span className="ni ni-square-pin"></span>
                           <br></br>
                           길찾기
@@ -185,18 +211,26 @@ const Detail = () => {
                 <h1>전체</h1>
                 <div className="review_list">
                   <ul>
-                    <li>
-                      <div className="rv_user">
-                        <span className="user_name">작성자명 | </span>
-                        <span className="date_write">작성날짜 : </span>
-                        <span className="date_write">2022.11.01</span>
-                      </div>
-                      <div className="comment">
-                        <p className="txt_comment">
-                          <span>너무 좋습니다.</span>
-                        </p>
-                      </div>
-                    </li>
+                    {/* 리뷰 위치 */}
+                    {rv.map((data) => {
+                      return (
+                        <li>
+                          <div className="rv_user">
+                            <span className="user_name">
+                              작성자명 | {data.user_id}
+                            </span>
+                            <span> </span>
+                            <span className="date_write">작성날짜 : </span>
+                            <span className="date_write">{data.rv_date}</span>
+                          </div>
+                          <div className="comment">
+                            <p className="txt_comment">
+                              <span>{data.rv_content}</span>
+                            </p>
+                          </div>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               </div>
@@ -206,9 +240,10 @@ const Detail = () => {
         <Row>
           <Col>
             <Card className="card_e">
-              <div className="map_info">
+              <div className="map_info" id="maps">
                 <h1>찾아가는 길</h1>
               </div>
+              <Detailmap addr={params.addr}></Detailmap>
             </Card>
           </Col>
         </Row>

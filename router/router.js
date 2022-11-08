@@ -69,6 +69,28 @@ router.post("/hosLogin", function (req, res) {
     }
   });
 });
+
+router.post("/getrv", function (req, res) {
+  let num = req.body.num;
+  let users = [];
+  let contents = [];
+  let date = [];
+  let sql = "select * from t_review where hosp_num = ?";
+  conn.query(sql, [num], function (err, rows) {
+    if (!err) {
+      for (let i = 0; i < rows.length; i++) {
+        users.push(rows[i].user_id);
+        contents.push(rows[i].rv_content);
+        date.push(rows[i].rv_date);
+      }
+
+      res.json({ result: "success", rv_list: rows });
+    } else {
+      res.json({ result: "false" });
+    }
+  });
+});
+
 router.post("/Login", function (req, res) {
   let id = req.body.id;
   let pw = req.body.pw;
@@ -184,7 +206,18 @@ router.post("/getnum", function (req, res) {
     "select hosp_num from t_hospital where hosp_name = ? and hosp_addr = ?";
   conn.query(sql, [names, addr], function (err, rows) {
     if (!err) {
-      res.json({ result: "success", num: rows[0].hosp_num });
+      let sql2 = "select * from t_review where hosp_num = ?";
+      conn.query(sql2, [rows[0].hosp_num], function (err2, rows2) {
+        if (!err2) {
+          res.json({
+            result: "success",
+            num: rows[0].hosp_num,
+            rv_list: rows2,
+          });
+        } else {
+          res.json({ result: "false" });
+        }
+      });
     } else {
       res.json({ result: "false" });
     }
@@ -212,6 +245,43 @@ router.post("/send_r", function (req, res) {
       });
     } else {
       console.log(err1);
+    }
+  });
+});
+
+router.post("/reservation", function (req, res) {
+  // let user = JSON.parse(localStorage.getItem("user"));
+  // req.body.id
+  let id = req.body.id;
+  console.log(id);
+  let hos_name = [];
+  let hos_ca = [];
+  let reserv_date = [];
+  let reserv_time = [];
+  let sql = `select h.hosp_name,h.hosp_category, date_format(r.reserv_time, '%Y년 %m월 %d일') date, date_format(r.reserv_time, '%H시 %i분') time
+  from t_hospital h, t_reservation r
+  where h.hosp_num=r.hosp_num
+  and r.user_id=?
+  order by reserv_time desc`;
+  conn.query(sql, [id], function (err, rows) {
+    if (rows.length > 0) {
+      for (let i = 0; i < rows.length; i++) {
+        hos_name.push(rows[i].hosp_name);
+        hos_ca.push(rows[i].hosp_category);
+        reserv_date.push(rows[i].date);
+        reserv_time.push(rows[i].time);
+      }
+      res.json({
+        result: "success",
+        hName: hos_name,
+        hCa: hos_ca,
+        rDate: reserv_date,
+        rTime: reserv_time,
+      });
+    } else {
+      console.log(err);
+      console.log("데이터 오류");
+      res.json({ result: "false" });
     }
   });
 });
