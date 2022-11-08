@@ -20,7 +20,7 @@ import { useState } from "react";
 import { NavLink as NavLinkRRD, Link } from "react-router-dom";
 // nodejs library to set properties for components
 import { PropTypes } from "prop-types";
-const lo = require("../../assets/img/brand/logo.png");
+const lo = require("../../assets/img/theme/newlearn.png");
 
 // reactstrap components
 import {

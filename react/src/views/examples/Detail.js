@@ -93,10 +93,7 @@ const Detail = () => {
                   <img className="logo" src={logo} />
 
                   <div className="main_name">
-                    <p className="small_tit">
-                      {params.title}
-                      {num}
-                    </p>
+                    <p className="small_tit">{params.ca}</p>
                     <p className="tit">{params.title}</p>
 
                     <ul className="menu">
@@ -197,10 +194,7 @@ const Detail = () => {
                 <br></br>
                 <br></br>
                 <h1>예약하기</h1>
-                <Example
-                  hosp_num={num}
-                  user_id={!user ? undefined : user.id}
-                ></Example>
+                <Example hosp_num={num}></Example>
               </div>
             </Card>
           </Col>

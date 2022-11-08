@@ -237,22 +237,32 @@ router.post("/send_r", function (req, res) {
   let nums = req.body.hosp_num;
   let id = req.body.id;
   let date = req.body.date;
+  let info1 = req.body.rninfo1;
+  let info2 = req.body.rninfo2;
+  let info3 = req.body.rninfo3;
+  let info4 = req.body.rninfo4;
+  let info5 = req.body.rninfo5;
+
   let sql1 =
     "select * from t_reservation where hosp_num = ? and reserv_time =?";
   let sql2 =
-    "insert into t_reservation(user_id,hosp_num,reserv_time) values(?,?,?)";
+    "insert into t_reservation(user_id, hosp_num, reserv_time , rinfo1,rinfo2,rinfo3,rinfo4,rinfo5) values(?,?,?,?,?,?,?,?)";
 
   conn.query(sql1, [nums, date], function (err1, rows1) {
     if (!err1) {
       if (rows1.length === 0) {
-        conn.query(sql2, [id, nums, date], function (err2, rows2) {
-          if (!err2) {
-            res.json({ result: "success" });
-          } else {
-            console.log(err2);
-            res.json({ result: "false" });
+        conn.query(
+          sql2,
+          [id, nums, date, info1, info2, info3, info4, info5],
+          function (err2, rows2) {
+            if (!err2) {
+              res.json({ result: "success" });
+            } else {
+              console.log(err2);
+              res.json({ result: "false" });
+            }
           }
-        });
+        );
       } else {
         res.json({ result: "dont" });
       }

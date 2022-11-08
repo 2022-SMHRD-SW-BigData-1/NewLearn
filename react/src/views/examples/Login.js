@@ -52,7 +52,7 @@ const Login = () => {
             console.log("값 안들어가졌다");
           }
           console.log(JSON.parse(localStorage.getItem("user")).nick);
-          history.push("/admin");
+          history.push("/admin/index");
         } else {
           alert("로그인 실패");
         }
