@@ -70,6 +70,7 @@ router.post("/hosLogin", function (req, res) {
   });
 });
 
+// 리뷰 작성 라우터
 router.post("/getrv", function (req, res) {
   let num = req.body.num;
   let id = req.body.id;
@@ -77,19 +78,21 @@ router.post("/getrv", function (req, res) {
   let sql = "select * from  t_reservation where hosp_num = ? and user_id = ?";
   let sql2 = "insert into t_review(user_id,hosp_num,rv_content) values(?,?,?) ";
   conn.query(sql, [num, id], function (err, rows) {
-    if (err) {
-      console.log(err);
-      res.json({ result: "false" });
-    } else if (rows.length > 0) {
-      res.json({ result: "dont" });
+    if (!err) {
+      console.log(rows.length);
+      if (rows.length !== 0) {
+        conn.query(sql2, [id, num, area], function (err2, rows2) {
+          if (!err2) {
+            res.json({ result: "success" });
+          } else {
+            res.json({ result: "false" });
+          }
+        });
+      } else {
+        res.json({ result: "dont" });
+      }
     } else {
-      conn.query(sql2, [id, num, area], function (err2, rows2) {
-        if (!err2) {
-          res.json({ result: "success" });
-        } else {
-          res.json({ result: "false" });
-        }
-      });
+      res.json({ result: "false" });
     }
   });
 });
@@ -202,6 +205,7 @@ router.get("/map", function (req, res) {
   });
 });
 
+// 병원 프라이머리 키 가져오는 라우터
 router.post("/getnum", function (req, res) {
   let names = req.body.names;
   let addr = req.body.addr;
@@ -226,6 +230,8 @@ router.post("/getnum", function (req, res) {
     }
   });
 });
+
+// 예약 하는 라우터
 router.post("/send_r", function (req, res) {
   console.log(req.body);
   let nums = req.body.hosp_num;
@@ -238,14 +244,18 @@ router.post("/send_r", function (req, res) {
 
   conn.query(sql1, [nums, date], function (err1, rows1) {
     if (!err1) {
-      conn.query(sql2, [id, nums, date], function (err2, rows2) {
-        if (!err2) {
-          res.json({ result: "success" });
-        } else {
-          console.log(err2);
-          res.json({ result: "false" });
-        }
-      });
+      if (rows1.length > 0) {
+        conn.query(sql2, [id, nums, date], function (err2, rows2) {
+          if (!err2) {
+            res.json({ result: "success" });
+          } else {
+            console.log(err2);
+            res.json({ result: "false" });
+          }
+        });
+      } else {
+        res.json({ result: "dont" });
+      }
     } else {
       console.log(err1);
     }

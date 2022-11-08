@@ -33,7 +33,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               target="_blank"
             >
-              이게 푸터뭐시기 다냐?
+              this is newLearn
             </a>
           </div>
         </Col>

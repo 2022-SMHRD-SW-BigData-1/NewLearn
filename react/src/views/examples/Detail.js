@@ -58,7 +58,7 @@ const Detail = () => {
           num: num,
         })
         .then((res) => {
-          if (res.data.result == "success") {
+          if (res.data.result === "success") {
             alert("리뷰작성 성공");
             window.location.reload();
           } else if (res.data.result == "dont") {
@@ -195,7 +195,10 @@ const Detail = () => {
                 <br></br>
                 <br></br>
                 <h1>예약하기</h1>
-                <Example hosp_num={num} user_id={user.id}></Example>
+                <Example
+                  hosp_num={num}
+                  user_id={!user ? undefined : user.id}
+                ></Example>
               </div>
             </Card>
           </Col>
