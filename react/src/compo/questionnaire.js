@@ -1,7 +1,7 @@
 import { Radio, radioClasses } from "@mui/material";
 import { textAlign } from "@mui/system";
 import "./questionnaire.css";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import moment from "moment";
@@ -27,36 +27,14 @@ const Questionnaire = (props) => {
   const [info13, setInfo13] = useState("");
   const [info14, setInfo14] = useState("");
 
-  const [ch1, setCh1] = useState("");
-  const [ch2, setCh2] = useState("");
-
   const send = (e) => {
     e.preventDefault();
     console.log(props.startDate);
     console.log(props.num);
     console.log(user.id);
-    setCh1(info4 + "," + info5 + "," + info6 + "," + info7);
-    setCh2(
-      info8 +
-        "," +
-        info9 +
-        "," +
-        info10 +
-        "," +
-        info11 +
-        "," +
-        info12 +
-        "," +
-        info13 +
-        "," +
-        info14
-    );
+    const ch1 = [info4, info5, info6, info7];
+    const ch2 = [info8, info9, info10, info11, info12, info13, info14];
 
-    console.log(ch1);
-    console.log(ch2);
-    reservation();
-  };
-  const reservation = () => {
     var s_date = moment(props.startDate).format("YYYY-MM-DD HH:mm:ss");
     axios
       .post("http://127.0.0.1:3001/send_r", {
@@ -66,13 +44,13 @@ const Questionnaire = (props) => {
         rninfo1: info1,
         rninfo2: info2,
         rninfo3: info3,
-        rninfo4: ch1,
-        rninfo5: ch2,
+        rninfo4: ch1.join("").split("/").join(", "),
+        rninfo5: ch2.join("").split("/").join(", "),
       })
       .then((res) => {
         if (res.data.result == "success") {
           alert("예약성공");
-          history.push("/admin/index");
+          window.location.reload();
         } else {
           alert("이미 예약된 시간입니다.");
         }
@@ -81,6 +59,7 @@ const Questionnaire = (props) => {
         console.log("예약 오류남");
       });
   };
+
   return (
     <>
       <div id="hahaha">
@@ -196,10 +175,10 @@ const Questionnaire = (props) => {
                 <input
                   type={"checkbox"}
                   name="Info4"
-                  value={"심리적 불안, 공포"}
+                  value={"심리적 불안, 공포/"}
                   onClick={(e) => {
-                    if (info4 == "") {
-                      setInfo4(e.target.value);
+                    if (info4 !== "") {
+                      setInfo4("");
                     } else {
                       setInfo4(e.target.value);
                     }
@@ -209,10 +188,10 @@ const Questionnaire = (props) => {
                 <input
                   type={"checkbox"}
                   name="Info4"
-                  value={"통증"}
+                  value={"통증/"}
                   onClick={(e) => {
-                    if (info4 == "") {
-                      setInfo5(e.target.value);
+                    if (info5 !== "") {
+                      setInfo5("");
                     } else {
                       setInfo5(e.target.value);
                     }
@@ -222,10 +201,10 @@ const Questionnaire = (props) => {
                 <input
                   type={"checkbox"}
                   name="Info4"
-                  value={"치료시간"}
+                  value={"치료시간/"}
                   onClick={(e) => {
-                    if (info4 == "") {
-                      setInfo6(e.target.value);
+                    if (info6 !== "") {
+                      setInfo6("");
                     } else {
                       setInfo6(e.target.value);
                     }
@@ -236,10 +215,10 @@ const Questionnaire = (props) => {
                 <input
                   type={"checkbox"}
                   name="Info4"
-                  value={"불친절"}
+                  value={"불친절/"}
                   onClick={(e) => {
-                    if (info4 == "") {
-                      setInfo7(e.target.value);
+                    if (info7 !== "") {
+                      setInfo7("");
                     } else {
                       setInfo7(e.target.value);
                     }
@@ -254,10 +233,10 @@ const Questionnaire = (props) => {
                 <input
                   type={"checkbox"}
                   name="Info5"
-                  value={"없음"}
+                  value={"없음/"}
                   onClick={(e) => {
-                    if (info4 == "") {
-                      setInfo8(e.target.value);
+                    if (info8 !== "") {
+                      setInfo8("");
                     } else {
                       setInfo8(e.target.value);
                     }
@@ -267,10 +246,10 @@ const Questionnaire = (props) => {
                 <input
                   type={"checkbox"}
                   name="Info5"
-                  value={"저, 고혈압"}
+                  value={"저, 고혈압/"}
                   onClick={(e) => {
-                    if (info4 == "") {
-                      setInfo9(e.target.value);
+                    if (info9 !== "") {
+                      setInfo9("");
                     } else {
                       setInfo9(e.target.value);
                     }
@@ -281,10 +260,10 @@ const Questionnaire = (props) => {
                 <input
                   type={"checkbox"}
                   name="Info5"
-                  value={"알레르기"}
+                  value={"알레르기/"}
                   onClick={(e) => {
-                    if (info4 == "") {
-                      setInfo10(e.target.value);
+                    if (info10 !== "") {
+                      setInfo10("");
                     } else {
                       setInfo10(e.target.value);
                     }
@@ -295,10 +274,10 @@ const Questionnaire = (props) => {
                 <input
                   type={"checkbox"}
                   name="Info5"
-                  value={"호흡기질환"}
+                  value={"호흡기질환/"}
                   onClick={(e) => {
-                    if (info4 == "") {
-                      setInfo11(e.target.value);
+                    if (info11 !== "") {
+                      setInfo11("");
                     } else {
                       setInfo11(e.target.value);
                     }
@@ -308,10 +287,10 @@ const Questionnaire = (props) => {
                 <input
                   type={"checkbox"}
                   name="Info5"
-                  value={"심장질환"}
+                  value={"심장질환/"}
                   onClick={(e) => {
-                    if (info4 == "") {
-                      setInfo12(e.target.value);
+                    if (info12 !== "") {
+                      setInfo12("");
                     } else {
                       setInfo12(e.target.value);
                     }
@@ -321,10 +300,10 @@ const Questionnaire = (props) => {
                 <input
                   type={"checkbox"}
                   name="Info5"
-                  value={"신장질환"}
+                  value={"신장질환/"}
                   onClick={(e) => {
-                    if (info4 == "") {
-                      setInfo13(e.target.value);
+                    if (info13 !== "") {
+                      setInfo13("");
                     } else {
                       setInfo13(e.target.value);
                     }
@@ -335,10 +314,10 @@ const Questionnaire = (props) => {
                 <input
                   type={"checkbox"}
                   name="Info5"
-                  value={"위장질환"}
+                  value={"위장질환/"}
                   onClick={(e) => {
-                    if (info4 == "") {
-                      setInfo14(e.target.value);
+                    if (info14 !== "") {
+                      setInfo14("");
                     } else {
                       setInfo14(e.target.value);
                     }

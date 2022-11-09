@@ -87,7 +87,7 @@ const Index = () => {
                   </Col>
 
                   {user ? (
-                    user.admin != "U" ? (
+                    user.admin == "A" ? (
                       <Col className="text-right" xs="4">
                         <Button
                           color="primary"
@@ -139,7 +139,7 @@ const Index = () => {
                         <td scope="col">{data.dates}</td>
                         <td>
                           {user ? (
-                            user.admin != "U" ? (
+                            user.admin == "A" ? (
                               <Col className="text-right" xs="4">
                                 <Button onClick={() => board_dl(data.seqs)}>
                                   삭제

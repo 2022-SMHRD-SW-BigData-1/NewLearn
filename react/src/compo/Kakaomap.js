@@ -56,16 +56,20 @@ const Map = () => {
 
   for (let i = 0; i < name.length; i++) {
     content.push(
-      `<table border="1px" style="width:300px;height:100px">
-                <tr>
+      `<table style="width:250px;height:100px">
+                <tr style="background-color:lightgray">
                     <th colspan='2' style="text-align:center">${name[i]}</th>
                 </tr>
                 <tr>
-                    <td>주소</td>
+                    <td style="text-align:right">주소&nbsp;&nbsp;:&nbsp;&nbsp;</td>
                     <td>${addr[i]}</td>
                 </tr>
                 <tr>
-                    <td colspan='2' align="center">  <button type='button' >
+                    <td style="text-align:right">연락처&nbsp;&nbsp;:&nbsp;&nbsp;</td>
+                    <td>${tel[i]}</td>
+                </tr>
+                <tr>
+                    <td colspan='2' align="center">  <button type='button' style='border:0' 'color:black'>
                     <a href="http://localhost:3000/admin/Detail?title=${name[i]}&addr=${addr[i]}&ca=${ca[i]}&tel=${tel[i]}"/>이동하기
                     </button></td>
                 </tr>

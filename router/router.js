@@ -62,7 +62,8 @@ router.post("/hosLogin", function (req, res) {
       let ids = rows[0].hosp_id;
       let pws = rows[0].hosp_pw;
       let nicks = rows[0].hosp_name;
-      res.json({ result: "success", id: ids, pw: pws, nick: nicks });
+      let num = rows[0].hosp_num;
+      res.json({ result: "success", id: ids, pw: pws, nick: nicks, num: num });
     } else {
       console.log(err);
       res.json({ result: "False" });
@@ -333,6 +334,55 @@ router.post("/revDelete", function (req, res) {
       res.json({ result: "success" });
     } else {
       console.log(err);
+      console.log("데이터 오류");
+      res.json({ result: "false" });
+    }
+  });
+});
+// 병원 예약 상황 가져오는 라우터
+router.post("/hosposts", function (req, res) {
+  let hosp_name = req.body.hname;
+  let user_name = [];
+  let user_phone = [];
+  let reserv_time = [];
+  let date = [];
+  let info1 = [];
+  let info2 = [];
+  let info3 = [];
+  let info4 = [];
+  let info5 = [];
+
+  let sql = `select u.user_name, u.user_phone, date_format(r.reserv_time, '%Y-%m-%d %H:%i') reserv_time, date_format(r.reserv_time, '%Y.%m.%d.') date, r.rinfo1,r.rinfo2,r.rinfo3,r.rinfo4,r.rinfo5
+  from t_user u, t_reservation r
+  where u.user_id = r.user_id
+  and r.hosp_num=(select hosp_num from t_hospital where hosp_name=?)
+  order by reserv_time desc`;
+  conn.query(sql, [hosp_name], function (err, rows) {
+    if (!err) {
+      for (let i = 0; i < rows.length; i++) {
+        user_name.push(rows[i].user_name);
+        user_phone.push(rows[i].user_phone);
+        reserv_time.push(rows[i].reserv_time);
+        date.push(rows[i].date);
+        info1.push(rows[i].rinfo1);
+        info2.push(rows[i].rinfo2);
+        info3.push(rows[i].rinfo3);
+        info4.push(rows[i].rinfo4);
+        info5.push(rows[i].rinfo5);
+      }
+      res.json({
+        result: "success",
+        uName: user_name,
+        uPhone: user_phone,
+        rDate: reserv_time,
+        date: date,
+        rinfo1: info1,
+        rinfo2: info2,
+        rinfo3: info3,
+        rinfo4: info4,
+        rinfo5: info5,
+      });
+    } else {
       console.log("데이터 오류");
       res.json({ result: "false" });
     }

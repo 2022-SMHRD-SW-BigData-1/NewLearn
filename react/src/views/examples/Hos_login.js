@@ -34,7 +34,7 @@ const Hos_Login = (props) => {
         if (res.data.result == "success") {
           try {
             localStorage.setItem(
-              "hos",
+              "user",
               JSON.stringify({
                 id: res.data.id,
                 pw: res.data.pw,

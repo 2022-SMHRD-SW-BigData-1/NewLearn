@@ -10,6 +10,7 @@ import Sidebar from "components/Sidebar/Sidebar.js";
 import Main from "../views/Index";
 import routesF from "routes.js";
 import routesS from "routesF.js";
+import routesH from "routesH";
 import Board from "../views/examples/board.js";
 import Detail from "views/examples/Detail";
 
@@ -25,7 +26,11 @@ const Admin = (props) => {
     if (JSON.parse(localStorage.getItem("user")) == undefined) {
       setRoutes(routesF);
     } else {
-      setRoutes(routesS);
+      if (JSON.parse(localStorage.getItem("user")).hosp_num == undefined) {
+        setRoutes(routesS);
+      } else {
+        setRoutes(routesH);
+      }
     }
   }, [location]);
 

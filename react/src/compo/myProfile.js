@@ -95,7 +95,7 @@ const Mypro = () => {
     setRinfo1(
       rInfo.map((data, index) => {
         console.log(data.rRtime1);
-        if ((index + 1) % 3 == 1 && data.rRtime1 > date) {
+        if ((index + 1) % 3 == 1 && data.rRtime1 > date + 100000000) {
           return (
             <>
               <a
@@ -164,7 +164,7 @@ const Mypro = () => {
     setRinfo2(
       rInfo.map((data, index) => {
         console.log(data.rRtime1);
-        if ((index + 1) % 3 == 2 && data.rRtime1 > date) {
+        if ((index + 1) % 3 == 2 && data.rRtime1 > date + 100000000) {
           return (
             <>
               <a
@@ -203,23 +203,27 @@ const Mypro = () => {
         } else if ((index + 1) % 3 == 2) {
           return (
             <>
-              <Card key={data.hName} className="revCard" name={index}>
-                <div>
-                  <h2 className="revName">
-                    {data.hName}
-                    <br />
-                    <span className="revCategory">
-                      <TbMinusVertical size="25" className="revImo" />
-                      {data.hCa}
-                    </span>
-                  </h2>
-                  <div className="revContent">
-                    <AiOutlineCalendar size="5%" /> {data.rDate}
-                    <TbMinusVertical size="15" />
-                    {data.rTime}
+              <a
+                href={`http://localhost:3000/admin/Detail?title=${data.hName}&addr=${data.hAddr}&ca=${data.hCa}&tel=${data.hTel}`}
+              >
+                <Card key={data.hName} className="revCard" name={index}>
+                  <div>
+                    <h2 className="revName">
+                      {data.hName}
+                      <br />
+                      <span className="revCategory">
+                        <TbMinusVertical size="25" className="revImo" />
+                        {data.hCa}
+                      </span>
+                    </h2>
+                    <div className="revContent">
+                      <AiOutlineCalendar size="5%" /> {data.rDate}
+                      <TbMinusVertical size="15" />
+                      {data.rTime}
+                    </div>
                   </div>
-                </div>
-              </Card>
+                </Card>
+              </a>
               <br />
             </>
           );
@@ -229,58 +233,66 @@ const Mypro = () => {
     setRinfo3(
       rInfo.map((data, index) => {
         console.log(data.rRtime1);
-        if ((index + 1) % 3 == 0 && data.rRtime1 > date) {
+        if ((index + 1) % 3 == 0 && data.rRtime1 > date + 100000000) {
           return (
             <>
-              <Card key={data.hName} className="revCard">
-                <div>
-                  <h2 className="revName">
-                    {data.hName}
-                    <br />
-                    <span className="revCategory">
-                      <TbMinusVertical size="25" className="revImo" />
-                      {data.hCa}
-                    </span>
-                  </h2>
-                  <div className="revContent">
-                    <AiOutlineCalendar size="5%" /> {data.rDate}
-                    <TbMinusVertical size="15" />
-                    {data.rTime}
+              <a
+                href={`http://localhost:3000/admin/Detail?title=${data.hName}&addr=${data.hAddr}&ca=${data.hCa}&tel=${data.hTel}`}
+              >
+                <Card key={data.hName} className="revCard">
+                  <div>
+                    <h2 className="revName">
+                      {data.hName}
+                      <br />
+                      <span className="revCategory">
+                        <TbMinusVertical size="25" className="revImo" />
+                        {data.hCa}
+                      </span>
+                    </h2>
+                    <div className="revContent">
+                      <AiOutlineCalendar size="5%" /> {data.rDate}
+                      <TbMinusVertical size="15" />
+                      {data.rTime}
+                    </div>
+                    <button
+                      className="revDel"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleLogin(data.hName, data.rRtime2);
+                      }}
+                    >
+                      예약취소
+                    </button>
                   </div>
-                  <button
-                    className="revDel"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleLogin(data.hName, data.rRtime2);
-                    }}
-                  >
-                    예약취소
-                  </button>
-                </div>
-              </Card>
+                </Card>
+              </a>
               <br />
             </>
           );
         } else if ((index + 1) % 3 == 0) {
           return (
             <>
-              <Card key={data.hName} className="revCard">
-                <div>
-                  <h2 className="revName">
-                    {data.hName}
-                    <br />
-                    <span className="revCategory">
-                      <TbMinusVertical size="25" className="revImo" />
-                      {data.hCa}
-                    </span>
-                  </h2>
-                  <div className="revContent">
-                    <AiOutlineCalendar size="5%" /> {data.rDate}
-                    <TbMinusVertical size="15" />
-                    {data.rTime}
+              <a
+                href={`http://localhost:3000/admin/Detail?title=${data.hName}&addr=${data.hAddr}&ca=${data.hCa}&tel=${data.hTel}`}
+              >
+                <Card key={data.hName} className="revCard">
+                  <div>
+                    <h2 className="revName">
+                      {data.hName}
+                      <br />
+                      <span className="revCategory">
+                        <TbMinusVertical size="25" className="revImo" />
+                        {data.hCa}
+                      </span>
+                    </h2>
+                    <div className="revContent">
+                      <AiOutlineCalendar size="5%" /> {data.rDate}
+                      <TbMinusVertical size="15" />
+                      {data.rTime}
+                    </div>
                   </div>
-                </div>
-              </Card>
+                </Card>
+              </a>
               <br />
             </>
           );
