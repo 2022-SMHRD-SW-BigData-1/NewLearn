@@ -1,17 +1,4 @@
-import {
-  Container,
-  UncontrolledTooltip,
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  FormGroup,
-  Form,
-  Input,
-  Row,
-  Col,
-} from "reactstrap";
-// core components
+import "../../compo/questionnaire.css";
 import { useEffect } from "react";
 const User_hosp = (props) => {
   useEffect(() => {
@@ -27,23 +14,27 @@ const User_hosp = (props) => {
             </th>
           </tr>
           <tr height="70">
-            <td>원하시는 치료 범위는 무엇입니까?{}</td>
+            <td className="quest">원하시는 치료 범위는 무엇입니까?{}</td>
             <td>{props.gopro.info1}</td>
           </tr>
           <tr height="70">
-            <td>저희 병원은 어떻게 알고 오셨습니까?</td>
+            <td className="quest">저희 병원은 어떻게 알고 오셨습니까?</td>
             <td>{props.gopro.info2}</td>
           </tr>
           <tr height="70">
-            <td>병원에 얼마 만에 오셨습니까?</td>
+            <td className="quest">병원에 얼마 만에 오셨습니까?</td>
             <td>{props.gopro.info3}</td>
           </tr>
           <tr height="70">
-            <td>과거 치료 중 불편했던 경험을 모두 표시하여 주세요</td>
+            <td className="quest">
+              과거 치료 중 불편했던 경험을 모두 표시하여 주세요
+            </td>
             <td>{props.gopro.info4}</td>
           </tr>
           <tr height="70">
-            <td>과거 또는 현재의 질환을 모두 표시하여 주세요.</td>
+            <td className="quest">
+              과거 또는 현재의 질환을 모두 표시하여 주세요.
+            </td>
             <td>{props.gopro.info5}</td>
           </tr>
           <tr colSpan>

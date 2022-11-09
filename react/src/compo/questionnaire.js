@@ -72,7 +72,7 @@ const Questionnaire = (props) => {
             </tr>
             <tr height="70">
               <td>원하시는 치료 범위는 무엇입니까?</td>
-              <td>
+              <td className="quest">
                 <input
                   type={"radio"}
                   name="Info1"
@@ -91,7 +91,7 @@ const Questionnaire = (props) => {
               </td>
             </tr>
             <tr height="70">
-              <td>저희 병원은 어떻게 알고 오셨습니까?</td>
+              <td className="quest">저희 병원은 어떻게 알고 오셨습니까?</td>
               <td>
                 <input
                   type={"radio"}
@@ -134,7 +134,7 @@ const Questionnaire = (props) => {
               </td>
             </tr>
             <tr height="70">
-              <td>병원에 얼마 만에 오셨습니까?</td>
+              <td className="quest">병원에 얼마 만에 오셨습니까?</td>
               <td>
                 <input
                   type={"radio"}
@@ -170,7 +170,9 @@ const Questionnaire = (props) => {
               </td>
             </tr>
             <tr height="70">
-              <td>과거 치료 중 불편했던 경험을 모두 표시하여 주세요</td>
+              <td className="quest">
+                과거 치료 중 불편했던 경험을 모두 표시하여 주세요
+              </td>
               <td>
                 <input
                   type={"checkbox"}
