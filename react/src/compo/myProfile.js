@@ -31,6 +31,8 @@ const Mypro = () => {
   const [rRtime, setRrtime] = useState([]);
   const [rRtime1, setRrtime1] = useState([]);
   const [rRtime2, setRrtime2] = useState([]);
+  const [addr, setAddr] = useState([]);
+  const [htel, setTel] = useState([]);
   let rInfo = [];
   const [rInfo1, setRinfo1] = useState([]);
   const [rInfo2, setRinfo2] = useState([]);
@@ -52,10 +54,14 @@ const Mypro = () => {
       rTime: rTime[i],
       rRtime2: rRtime2[i],
       rRtime1: rRtime1[i],
+      hAddr: addr[i],
+      hTel: htel[i],
     });
     console.log(rInfo[i].rRtime2);
     console.log(rInfo[i].rRtime1);
     console.log(date);
+    console.log(addr);
+    console.log(htel);
 
     if (rInfo[i].rRtime1 > date) {
       console.log("넘어감");
@@ -74,6 +80,8 @@ const Mypro = () => {
           setRtime(res.data.rTime);
           setRrtime(res.data.rRtime);
           setData(1);
+          setAddr(res.data.addr);
+          setTel(res.data.tel);
         } else {
           console.log("데이터베이스 오류");
         }
@@ -90,55 +98,63 @@ const Mypro = () => {
         if ((index + 1) % 3 == 1 && data.rRtime1 > date) {
           return (
             <>
-              <Card key={data.hName} className="revCard" name={index}>
-                <div>
-                  <h2 className="revName">
-                    {data.hName}
-                    <br />
-                    <span className="revCategory">
-                      <TbMinusVertical size="25" className="revImo" />
-                      {data.hCa}
-                    </span>
-                  </h2>
-                  <div className="revContent">
-                    <AiOutlineCalendar size="5%" /> {data.rDate}
-                    <TbMinusVertical size="15" />
-                    {data.rTime}
+              <a
+                href={`http://localhost:3000/admin/Detail?title=${data.hName}&addr=${data.hAddr}&ca=${data.hCa}&tel=${data.hTel}`}
+              >
+                <Card key={data.hName} className="revCard" name={index}>
+                  <div>
+                    <h2 className="revName">
+                      {data.hName}
+                      <br />
+                      <span className="revCategory">
+                        <TbMinusVertical size="25" className="revImo" />
+                        {data.hCa}
+                      </span>
+                    </h2>
+                    <div className="revContent">
+                      <AiOutlineCalendar size="5%" /> {data.rDate}
+                      <TbMinusVertical size="15" />
+                      {data.rTime}
+                    </div>
+                    <button
+                      className="revDel"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleLogin(data.hName, data.rRtime2);
+                      }}
+                    >
+                      예약취소
+                    </button>
                   </div>
-                  <button
-                    className="revDel"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleLogin(data.hName, data.rRtime2);
-                    }}
-                  >
-                    예약취소
-                  </button>
-                </div>
-              </Card>
+                </Card>
+              </a>
               <br />
             </>
           );
         } else if ((index + 1) % 3 == 1) {
           return (
             <>
-              <Card key={data.hName} className="revCard" name={index}>
-                <div>
-                  <h2 className="revName">
-                    {data.hName}
-                    <br />
-                    <span className="revCategory">
-                      <TbMinusVertical size="25" className="revImo" />
-                      {data.hCa}
-                    </span>
-                  </h2>
-                  <div className="revContent">
-                    <AiOutlineCalendar size="5%" /> {data.rDate}
-                    <TbMinusVertical size="15" />
-                    {data.rTime}
+              <a
+                href={`http://localhost:3000/admin/Detail?title=${data.hName}&addr=${data.hAddr}&ca=${data.hCa}&tel=${data.hTel}`}
+              >
+                <Card key={data.hName} className="revCard" name={index}>
+                  <div>
+                    <h2 className="revName">
+                      {data.hName}
+                      <br />
+                      <span className="revCategory">
+                        <TbMinusVertical size="25" className="revImo" />
+                        {data.hCa}
+                      </span>
+                    </h2>
+                    <div className="revContent">
+                      <AiOutlineCalendar size="5%" /> {data.rDate}
+                      <TbMinusVertical size="15" />
+                      {data.rTime}
+                    </div>
                   </div>
-                </div>
-              </Card>
+                </Card>
+              </a>
               <br />
             </>
           );
@@ -151,32 +167,36 @@ const Mypro = () => {
         if ((index + 1) % 3 == 2 && data.rRtime1 > date) {
           return (
             <>
-              <Card key={data.hName} className="revCard" name={index}>
-                <div>
-                  <h2 className="revName">
-                    {data.hName}
-                    <br />
-                    <span className="revCategory">
-                      <TbMinusVertical size="25" className="revImo" />
-                      {data.hCa}
-                    </span>
-                  </h2>
-                  <div className="revContent">
-                    <AiOutlineCalendar size="5%" /> {data.rDate}
-                    <TbMinusVertical size="15" />
-                    {data.rTime}
+              <a
+                href={`http://localhost:3000/admin/Detail?title=${data.hName}&addr=${data.hAddr}&ca=${data.hCa}&tel=${data.hTel}`}
+              >
+                <Card key={data.hName} className="revCard" name={index}>
+                  <div>
+                    <h2 className="revName">
+                      {data.hName}
+                      <br />
+                      <span className="revCategory">
+                        <TbMinusVertical size="25" className="revImo" />
+                        {data.hCa}
+                      </span>
+                    </h2>
+                    <div className="revContent">
+                      <AiOutlineCalendar size="5%" /> {data.rDate}
+                      <TbMinusVertical size="15" />
+                      {data.rTime}
+                    </div>
+                    <button
+                      className="revDel"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleLogin(data.hName, data.rRtime2);
+                      }}
+                    >
+                      예약취소
+                    </button>
                   </div>
-                  <button
-                    className="revDel"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleLogin(data.hName, data.rRtime2);
-                    }}
-                  >
-                    예약취소
-                  </button>
-                </div>
-              </Card>
+                </Card>
+              </a>
               <br />
             </>
           );
@@ -405,77 +425,3 @@ const Mypro = () => {
 };
 
 export default Mypro;
-
-{
-  /* <Row>
-                                <Col md="12">
-                                    <FormGroup>
-                                        <label
-                                        className="form-control-label"
-                                        htmlFor="input-address"
-                                        >
-                                            Address
-                                        </label>
-                                        <Input
-                                        className="form-control-alternative"
-                                        defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                                        id="input-address"
-                                        placeholder="Home Address"
-                                        type="text"
-                                        />
-                                    </FormGroup>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col lg="4">
-                                    <FormGroup>
-                                        <label
-                                        className="form-control-label"
-                                        htmlFor="input-city"
-                                        >
-                                            City
-                                        </label>
-                                        <Input
-                                        className="form-control-alternative"
-                                        defaultValue="New York"
-                                        id="input-city"
-                                        placeholder="City"
-                                        type="text"
-                                        />
-                                    </FormGroup>
-                                </Col>
-                                <Col lg="4">
-                                    <FormGroup>
-                                        <label
-                                        className="form-control-label"
-                                        htmlFor="input-country"
-                                        >
-                                            Country
-                                        </label>
-                                        <Input
-                                        className="form-control-alternative"
-                                        defaultValue="United States"
-                                        id="input-country"
-                                        placeholder="Country"
-                                        type="text"
-                                        />
-                                    </FormGroup>
-                                </Col>
-                                <Col lg="4">
-                                    <FormGroup>
-                                        <label
-                                        className="form-control-label"
-                                        htmlFor="input-country"
-                                        >
-                                            Postal code
-                                        </label>
-                                        <Input
-                                        className="form-control-alternative"
-                                        id="input-postal-code"
-                                        placeholder="Postal code"
-                                        type="number"
-                                        />
-                                    </FormGroup>
-                                </Col>
-                            </Row> */
-}

@@ -22,37 +22,7 @@ const Hos_Login = (props) => {
   const [ids, setID] = useState("");
   const [pws, setPw] = useState("");
   const [modals, setModal] = useState(false);
-  const handleLogin = (e) => {
-    e.preventDefault();
-    axios
-      .post("http://127.0.0.1:3001/Login", {
-        id: ids,
-        pw: pws,
-      })
-      .then((res) => {
-        if (res.data.result == "success") {
-          try {
-            localStorage.setItem(
-              "user",
-              JSON.stringify({
-                id: res.data.id,
-                pw: res.data.pw,
-                nick: res.data.nick,
-              })
-            );
-          } catch (error) {
-            console.log("값 안들어가졌다");
-          }
-          console.log(JSON.parse(localStorage.getItem("user")).nick);
-          history.push("/admin");
-        } else {
-          return <Link to="/auth/login"></Link>;
-        }
-      })
-      .catch(() => {
-        console.log("데이터 보내기 실패");
-      });
-  };
+  // 병원 로그인
   const handleHosLogin = (e) => {
     e.preventDefault();
     axios
@@ -64,18 +34,19 @@ const Hos_Login = (props) => {
         if (res.data.result == "success") {
           try {
             localStorage.setItem(
-              "user",
+              "hos",
               JSON.stringify({
                 id: res.data.id,
                 pw: res.data.pw,
                 nick: res.data.nick,
+                hosp_num: res.data.num,
               })
             );
           } catch (error) {
             console.log("값 안들어가졌다");
           }
           console.log(JSON.parse(localStorage.getItem("user")).nick);
-          history.push("/admin");
+          history.push("/admin/index");
         } else {
           alert("로그인 실패");
         }
