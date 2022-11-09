@@ -194,6 +194,11 @@ function Hosposts() {
           uPhone: uPhone[i],
           rDate: rDate[i],
           date: date[i],
+          info1: info1[i],
+          info2: info2[i],
+          info3: info3[i],
+          info4: info4[i],
+          info5: info5[i],
         });
       }
     }
