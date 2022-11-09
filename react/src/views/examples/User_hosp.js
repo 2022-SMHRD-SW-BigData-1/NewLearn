@@ -44,7 +44,7 @@ const User_hosp = (props) => {
                   props.setModal2(false);
                 }}
               >
-                제출
+                확인
               </button>
             </td>
           </tr>

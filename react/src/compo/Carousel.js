@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Carousel.css";
+import { Link } from "react-router-dom";
 // import styled from "styled-components";
 
 // const StyledSlider = styled(Slider)`
@@ -37,34 +38,36 @@ export default class SimpleSlider extends Component {
       <div>
         <Slider {...settings}>
           <div>
-            <a href="https://www.naver.com/">
+            <Link to={"/admin/maps"}>
+              {/* <a href="https://www.naver.com/"> */}
               <img
                 className="sliderImg"
                 src="https://www.amc.seoul.kr/asan/images/hospitalinfo/img_introRolling01.jpg"
                 width="100%"
                 height="400px"
               />
-            </a>
+              {/* </a> */}
+            </Link>
           </div>
           <div>
-            <a href="https://www.naver.com/">
+            <Link to={"/admin/maps"}>
               <img
                 className="sliderImg"
                 src="https://mblogthumb-phinf.pstatic.net/MjAyMDA0MTVfMjE5/MDAxNTg2OTM1NTM2ODk5.00AUDsrNdhVIUkJyJSXTga4RKKb_cBt7mFT-OJUsmZkg.TZYwZiOPFM9ejU31q7SQlWRpgyCbRdejbc31uxySGt4g.JPEG.ohsk/KakaoTalk_20200415_160455546.jpg?type=w800"
                 width="100%"
                 height="400px"
               />
-            </a>
+            </Link>
           </div>
           <div>
-            <a href="https://www.naver.com/">
+            <Link to={"/admin/maps"}>
               <img
                 className="sliderImg"
                 src="http://cdn.bosa.co.kr/news/photo/201901/2098294_141356_4545.jpg"
                 width="100%"
                 height="400px"
               />
-            </a>
+            </Link>
           </div>
         </Slider>
       </div>

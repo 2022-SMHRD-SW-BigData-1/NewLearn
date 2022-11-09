@@ -14,7 +14,7 @@ import {
   Badge,
   Col,
 } from "reactstrap";
-
+import "./examples/kkkk.css";
 import Header from "components/Headers/Header.js";
 import axios from "axios";
 import Modal from "react-modal";
@@ -105,10 +105,8 @@ const Index = () => {
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
-                    <th width="10px">번호</th>
-                    <th scope="col" align="left">
-                      제목
-                    </th>
+                    <th scope="col">번호</th>
+                    <th scope="col">제목</th>
                     <th scope="col">작성자</th>
                     <th scope="col">작성날짜</th>
                     <th />
