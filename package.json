@@ -13,6 +13,7 @@
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
     "path": "^0.12.7",
+    "react-calendar": "^4.0.0",
     "react-datepicker": "^4.8.0",
     "react-icons": "^4.6.0",
     "react-modal": "^3.16.1",

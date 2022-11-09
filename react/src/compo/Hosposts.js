@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { TbMinusVertical } from "react-icons/tb";
 import { RiMapPinLine, RiPhoneLine } from "react-icons/ri";
+import { MdCalendarToday } from "react-icons/md";
 import {
   Button,
   Card,
@@ -13,6 +14,10 @@ import {
 } from "reactstrap";
 import Modal from "react-modal";
 import User_hosp from "../views/examples/User_hosp.js";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import moment from "moment";
+import "./Hosposts.css";
 
 function Hosposts() {
   const [revD1, setRevd1] = useState([]);
@@ -30,6 +35,9 @@ function Hosposts() {
   const [info4, setInfo4] = useState([]);
   const [info5, setInfo5] = useState([]);
   const [gopro, setPro] = useState([1, 2, 3]);
+  let [modal, setModal] = useState(false);
+  const [value, onChange] = useState(new Date());
+  const [date, setDate] = useState([]);
 
   for (let i = 0; i < uName.length; i++) {
     // rRtime1.push(new Date(rRtime[i]).getTime())
@@ -38,6 +46,7 @@ function Hosposts() {
       uName: uName[i],
       uPhone: uPhone[i],
       rDate: rDate[i],
+      date: date[i],
       info1: info1[i],
       info2: info2[i],
       info3: info3[i],
@@ -54,6 +63,7 @@ function Hosposts() {
           setUname(res.data.uName);
           setUphone(res.data.uPhone);
           setRdate(res.data.rDate);
+          setDate(res.data.date);
           setInfo1(res.data.rinfo1);
           setInfo2(res.data.rinfo2);
           setInfo3(res.data.rinfo3);
@@ -93,7 +103,7 @@ function Hosposts() {
                     </span>
                   </h2>
                   <div className="cardContent">
-                    <RiMapPinLine size="5%" /> {data.rDate}
+                    <MdCalendarToday size="5%" /> {data.rDate}
                   </div>
                 </div>
               </Card>
@@ -127,7 +137,7 @@ function Hosposts() {
                   </h2>
 
                   <div className="cardContent">
-                    <RiMapPinLine size="5%" /> {data.rDate}
+                    <MdCalendarToday size="5%" /> {data.rDate}
                   </div>
                 </div>
               </Card>
@@ -161,7 +171,7 @@ function Hosposts() {
                     </span>
                   </h2>
                   <div className="cardContent">
-                    <RiMapPinLine size="5%" /> {data.rDate}
+                    <MdCalendarToday size="5%" /> {data.rDate}
                   </div>
                 </div>
               </Card>
@@ -171,6 +181,23 @@ function Hosposts() {
         }
       })
     );
+  };
+
+  const hao = () => {
+    console.log(moment(value).format("L"));
+    hrInfo = [];
+    console.log(hrInfo);
+    for (let i = 0; i < uName.length; i++) {
+      if (date[i] == moment(value).format("L")) {
+        hrInfo.push({
+          uName: uName[i],
+          uPhone: uPhone[i],
+          rDate: rDate[i],
+          date: date[i],
+        });
+      }
+    }
+    li();
   };
 
   useEffect(
@@ -183,10 +210,23 @@ function Hosposts() {
   return (
     <>
       <div id="wrap">
-        <h1 align="center" id="titleHos">
+        <h1
+          align="center"
+          id="titleHos"
+          onClick={() => {
+            window.location.reload();
+          }}
+        >
           예약자 목록
         </h1>
-        <div id="searchAll">{/* <Example/> */}</div>
+        <button
+          id="calendar"
+          onClick={() => {
+            setModal(true);
+          }}
+        >
+          <MdCalendarToday size="25" />
+        </button>
         <br />
         <div style={{ display: "flex" }}>
           <div
@@ -212,6 +252,27 @@ function Hosposts() {
         className="question"
       >
         <User_hosp gopro={gopro} setModal2={setModal2}></User_hosp>
+      </Modal>
+      <Modal
+        isOpen={modal}
+        onRequestClose={() => setModal(false)}
+        className="loginFail1"
+      >
+        <div>
+          <Calendar onChange={onChange} value={value} />
+          <button
+            id="moButton"
+            onClick={() => {
+              setModal(false);
+              hao();
+            }}
+          >
+            제출
+          </button>
+          {/* <div >
+              {moment(value).format("YYYY년 MM월 DD일")}
+          </div> */}
+        </div>
       </Modal>
     </>
   );
