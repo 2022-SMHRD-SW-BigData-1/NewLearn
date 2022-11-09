@@ -61,7 +61,7 @@ const Admin = (props) => {
         return routes[i].name;
       }
     }
-    return "Brand";
+    return "메인화면";
   };
 
   return (

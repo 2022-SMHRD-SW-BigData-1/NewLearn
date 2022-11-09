@@ -123,9 +123,9 @@ const Sidebar = (props) => {
           <NavbarBrand className="pt-0" {...navbarBrandProps}>
             <img
               alt={logo.imgAlt}
-              width="300px"
-              height="100rv"
-              // className="navbar-brand-img"
+              // width="422px"
+              // height="100rv"
+              className="navbar-brand-img"
               src={lo}
             />
           </NavbarBrand>

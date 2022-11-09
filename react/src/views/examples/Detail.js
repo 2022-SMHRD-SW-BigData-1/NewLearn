@@ -168,7 +168,7 @@ const Detail = () => {
 
                 <div>
                   <h4 className="ni ni-mobile-button">
-                    <span className="info_txt">{params.tel}</span>
+                    <span className="info_txt"> {params.tel}</span>
                   </h4>
                 </div>
               </div>

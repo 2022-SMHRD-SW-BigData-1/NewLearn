@@ -61,12 +61,10 @@ const Map = () => {
                     <th colspan='2' style="text-align:center">${name[i]}</th>
                 </tr>
                 <tr>
-                    <td style="text-align:right">주소&nbsp;&nbsp;:&nbsp;&nbsp;</td>
-                    <td>${addr[i]}</td>
+                    <td style="text-align:left">&nbsp;&nbsp;&nbsp;주소&nbsp;&nbsp;:&nbsp;&nbsp;${addr[i]}</td>
                 </tr>
                 <tr>
-                    <td style="text-align:right">연락처&nbsp;&nbsp;:&nbsp;&nbsp;</td>
-                    <td>${tel[i]}</td>
+                    <td style="text-align:left">연락처&nbsp;&nbsp;:&nbsp;&nbsp;${tel[i]}</td>
                 </tr>
                 <tr>
                     <td colspan='2' align="center">  <button type='button' style='border:0' 'color:black'>

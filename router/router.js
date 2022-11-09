@@ -27,7 +27,8 @@ let conn = mysql.createConnection({
 router.get("/board", function (req, res) {
   let board = [];
 
-  let sql = "select * from t_board";
+  let sql =
+    "select date_format(board_date, '%Y-%m-%d ) as board_date,board_title,board_content from t_board";
   conn.query(sql, function (err, rows) {
     if (!err) {
       for (let i = 0; i < rows.length; i++) {
@@ -214,7 +215,8 @@ router.post("/getnum", function (req, res) {
     "select hosp_num from t_hospital where hosp_name = ? and hosp_addr = ?";
   conn.query(sql, [names, addr], function (err, rows) {
     if (!err) {
-      let sql2 = "select * from t_review where hosp_num = ?";
+      let sql2 =
+        "select date_format(rv_date, '%Y-%m-%d %H:%i') rv_date,hosp_num,rv_content,user_id from t_review where hosp_num = ?";
       conn.query(sql2, [rows[0].hosp_num], function (err2, rows2) {
         if (!err2) {
           res.json({

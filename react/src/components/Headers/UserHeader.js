@@ -37,14 +37,12 @@ const UserHeader = () => {
         <span className="mask bg-gradient-default opacity-8" />
         {/* Header container */}
         <Container className="d-flex align-items-center" fluid>
-          <Row>
-            <Col lg="10" md="10">
-              <h1 className="display-2 text-white">{user.nick}님</h1>
-              <p className="text-white mt-0 mb-5">
-                NewLearn페이지에 오신걸 환영합니다.
-              </p>
-            </Col>
-          </Row>
+          {/* <Row> */}
+          <Col lg="10" md="13">
+            <h1 className="display-2 text-white">{user.nick}님 </h1>
+            <p className="text-white">뉴런페이지에 오신걸 환영합니다!</p>
+          </Col>
+          {/* </Row> */}
         </Container>
       </div>
     </>
