@@ -28,7 +28,7 @@ router.get("/board", function (req, res) {
   let board = [];
 
   let sql =
-    "select date_format(board_date, '%Y-%m-%d ) as board_date,board_title,board_content from t_board";
+    "select date_format(board_date, '%Y-%m-%d' ) as board_date, board_title,board_content from t_board";
   conn.query(sql, function (err, rows) {
     if (!err) {
       for (let i = 0; i < rows.length; i++) {
@@ -48,6 +48,7 @@ router.get("/board", function (req, res) {
         t_board: board,
       });
     } else {
+      console.log(err);
       res.json({ result: "false" });
     }
   });

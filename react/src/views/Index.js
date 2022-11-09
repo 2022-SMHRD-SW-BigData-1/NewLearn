@@ -105,10 +105,10 @@ const Index = () => {
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
-                    <th scope="col">번호</th>
-                    <th scope="col">제목</th>
-                    <th scope="col" />
-                    <th scope="col" />
+                    <th width="10px">번호</th>
+                    <th scope="col" align="left">
+                      제목
+                    </th>
                     <th scope="col">작성자</th>
                     <th scope="col">작성날짜</th>
                     <th />
@@ -118,7 +118,9 @@ const Index = () => {
                   {board.slice(offset, offset + limit).map((data, index) => {
                     return (
                       <tr>
-                        <td scope="col">{index + 1}</td>
+                        <td width="10px" scope="col">
+                          {index + 1}
+                        </td>
                         <td scope="col">
                           <Link
                             to={{
@@ -133,8 +135,7 @@ const Index = () => {
                             {data.titles}
                           </Link>
                         </td>
-                        <td scope="col" />
-                        <td scope="col" />
+
                         <td scope="col">admin</td>
                         <td scope="col">{data.dates}</td>
                         <td>
