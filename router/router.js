@@ -137,8 +137,8 @@ router.post("/Login", function (req, res) {
 router.post("/delete", function (req, res) {
   console.log(req.body.seq);
   let seq = req.body.seq;
-  let sql = `delete from t_board where board_seq =${seq}`;
-  conn.query(sql, function (err, rows) {
+  let sql = `delete from t_board where board_seq =?`;
+  conn.query(sql, [seq], function (err, rows) {
     if (!err) {
       res.json({
         result: "success",
@@ -331,7 +331,7 @@ router.post("/revDelete", function (req, res) {
   let hName = req.body.hName;
   let hTime = req.body.hTime;
   console.log(hName);
-  let sql = `delete from t_reservation where reserv_time=? and hosp_num=(select hosp_num from t_hospital where hosp_name=?)`;
+  let sql = `delete from t_reservation where reserv_time=? and hosp_num= (select hosp_num from t_hospital where hosp_name=?)`;
   conn.query(sql, [hTime, hName], function (err, rows) {
     if (!err) {
       res.json({ result: "success" });
