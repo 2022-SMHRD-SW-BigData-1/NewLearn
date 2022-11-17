@@ -1,21 +1,3 @@
-/*!
-
-=========================================================
-* Argon Dashboard React - v1.2.2
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
 // reactstrap components
 import {
   Button,
@@ -42,6 +24,10 @@ const Register = () => {
   const [user_pw, setPw] = useState("");
   const [user_phone, setPhone] = useState("");
   const [user_num, setNum] = useState("");
+  const [user_addr, setAddr] = useState("");
+  const [user_host, setHost] = useState("");
+  const [user_ca, setCa] = useState("");
+
   const [chbutton, setButton] = useState(1);
 
   const handleJoin = (e) => {
@@ -53,11 +39,38 @@ const Register = () => {
         pw: user_pw,
         phone: user_phone,
         num: user_num,
+        addr: user_addr,
       })
       .then((res) => {
         if (res.data.result == "success") {
+          alert("회원가입 성공");
           history.push("/auth");
         } else {
+          alert("회원가입 실패");
+        }
+      })
+      .catch(() => {
+        console.log("데이터 보내기 실패");
+      });
+  };
+  const handleJoinH = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://127.0.0.1:3001/joinDataH", {
+        name: user_name,
+        id: user_id,
+        pw: user_pw,
+        phone: user_phone,
+        ca: user_ca,
+        host: user_host,
+        addr: user_addr,
+      })
+      .then((res) => {
+        if (res.data.result == "success") {
+          alert("회원가입 성공");
+          history.push("/auth");
+        } else {
+          alert("회원가입 실패");
         }
       })
       .catch(() => {
@@ -174,6 +187,20 @@ const Register = () => {
                     />
                   </InputGroup>
                 </FormGroup>
+                <FormGroup>
+                  <InputGroup className="input-group-alternative mb-3">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="ni ni-hat-3" />
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input
+                      placeholder="주소"
+                      type="text"
+                      onChange={(e) => setAddr(e.target.value)}
+                    />
+                  </InputGroup>
+                </FormGroup>
 
                 <div className="text-muted font-italic">
                   <small>
@@ -252,7 +279,7 @@ const Register = () => {
               <div className="text-center text-muted mb-4">
                 <small>Or sign up with credentials</small>
               </div>
-              <Form role="form" onSubmit={handleJoin}>
+              <Form role="form" onSubmit={handleJoinH}>
                 <FormGroup>
                   <InputGroup className="input-group-alternative mb-3">
                     <InputGroupAddon addonType="prepend">
@@ -261,7 +288,7 @@ const Register = () => {
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
-                      placeholder="이름"
+                      placeholder="병원이름"
                       type="text"
                       onChange={(e) => setName(e.target.value)}
                     />
@@ -304,7 +331,7 @@ const Register = () => {
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
-                      placeholder="핸드폰"
+                      placeholder="병원번호"
                       type="text"
                       onChange={(e) => setPhone(e.target.value)}
                     />
@@ -318,9 +345,37 @@ const Register = () => {
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
-                      placeholder="주민등록번호"
+                      placeholder="병원주소"
                       type="text"
-                      onChange={(e) => setNum(e.target.value)}
+                      onChange={(e) => setAddr(e.target.value)}
+                    />
+                  </InputGroup>
+                </FormGroup>
+                <FormGroup>
+                  <InputGroup className="input-group-alternative mb-3">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="ni ni-hat-3" />
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input
+                      placeholder="이름"
+                      type="text"
+                      onChange={(e) => setHost(e.target.value)}
+                    />
+                  </InputGroup>
+                </FormGroup>
+                <FormGroup>
+                  <InputGroup className="input-group-alternative mb-3">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="ni ni-hat-3" />
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input
+                      placeholder="병원카테고리"
+                      type="text"
+                      onChange={(e) => setCa(e.target.value)}
                     />
                   </InputGroup>
                 </FormGroup>
@@ -355,7 +410,7 @@ const Register = () => {
                 </Row>
                 <div className="text-center">
                   <Button className="mt-4" color="primary" type="submit">
-                    회원가입
+                    병원가입
                   </Button>
                 </div>
               </Form>

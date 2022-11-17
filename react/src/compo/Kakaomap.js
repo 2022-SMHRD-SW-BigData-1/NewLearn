@@ -50,10 +50,6 @@ const Map = () => {
   let ma = [];
   let markers = [];
 
-  const data1 = function () {
-    console.log("Test");
-  };
-
   for (let i = 0; i < name.length; i++) {
     content.push(
       `<table style="width:250px;height:100px">

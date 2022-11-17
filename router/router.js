@@ -149,15 +149,39 @@ router.post("/delete", function (req, res) {
     }
   });
 });
+// 사용자 회원가입
 router.post("/joinData", function (req, res) {
   let id = req.body.id;
   let pw = req.body.pw;
   let name = req.body.name;
   let phone = req.body.phone;
   let nums = req.body.num;
+  let addr = req.body.addr;
   let sql =
-    "insert into t_user(user_id,user_pw,user_name,user_rn,user_phone) values(?,?,?,?,?)";
-  conn.query(sql, [id, pw, name, nums, phone], function (err, rows) {
+    "insert into t_user(user_id,user_pw,user_name,user_rn,user_phone,user_addr) values(?,?,?,?,?,?)";
+  conn.query(sql, [id, pw, name, nums, phone, addr], function (err, rows) {
+    console.log("연결성공");
+    if (!err) {
+      console.log("회원가입 완료");
+      res.json({ result: "success" });
+    } else {
+      console.log(err);
+      res.json({ result: "False" });
+    }
+  });
+});
+// 병원 회원가입
+router.post("/joinDataH", function (req, res) {
+  let id = req.body.id;
+  let pw = req.body.pw;
+  let hname = req.body.name;
+  let phone = req.body.phone;
+  let ca = req.body.ca;
+  let host = req.body.host;
+  let addr = req.body.addr;
+  let sql =
+    "insert into t_hospital(hosp_name,hosp_addr,hosp_tel,hosp_director,hosp_category,hosp_id,hosp_pw) values(?,?,?,?,?,?,?)";
+  conn.query(sql, [hname, addr, phone, host, ca, id, pw], function (err, rows) {
     console.log("연결성공");
     if (!err) {
       console.log("회원가입 완료");
