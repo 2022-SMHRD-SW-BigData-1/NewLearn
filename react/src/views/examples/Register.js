@@ -57,6 +57,7 @@ const Register = () => {
     e.preventDefault();
     axios
       .post("http://127.0.0.1:3001/joinDataH", {
+        num: user_num,
         name: user_name,
         id: user_id,
         pw: user_pw,
@@ -288,6 +289,20 @@ const Register = () => {
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
+                      placeholder="사업자 번호"
+                      type="text"
+                      onChange={(e) => setNum(e.target.value)}
+                    />
+                  </InputGroup>
+                </FormGroup>
+                <FormGroup>
+                  <InputGroup className="input-group-alternative mb-3">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="ni ni-hat-3" />
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input
                       placeholder="병원이름"
                       type="text"
                       onChange={(e) => setName(e.target.value)}
@@ -331,7 +346,7 @@ const Register = () => {
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
-                      placeholder="병원번호"
+                      placeholder="병원전화번호"
                       type="text"
                       onChange={(e) => setPhone(e.target.value)}
                     />

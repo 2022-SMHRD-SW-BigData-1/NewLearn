@@ -179,18 +179,23 @@ router.post("/joinDataH", function (req, res) {
   let ca = req.body.ca;
   let host = req.body.host;
   let addr = req.body.addr;
+  let num = req.body.num;
   let sql =
-    "insert into t_hospital(hosp_name,hosp_addr,hosp_tel,hosp_director,hosp_category,hosp_id,hosp_pw) values(?,?,?,?,?,?,?)";
-  conn.query(sql, [hname, addr, phone, host, ca, id, pw], function (err, rows) {
-    console.log("연결성공");
-    if (!err) {
-      console.log("회원가입 완료");
-      res.json({ result: "success" });
-    } else {
-      console.log(err);
-      res.json({ result: "False" });
+    "insert into t_hospital(hosp_name,hosp_addr,hosp_tel,hosp_director,hosp_category,hosp_id,hosp_pw,hosp_num) values(?,?,?,?,?,?,?,?)";
+  conn.query(
+    sql,
+    [hname, addr, phone, host, ca, id, pw, num],
+    function (err, rows) {
+      console.log("연결성공");
+      if (!err) {
+        console.log("회원가입 완료");
+        res.json({ result: "success" });
+      } else {
+        console.log(err);
+        res.json({ result: "False" });
+      }
     }
-  });
+  );
 });
 router.post("/SendBoard", function (req, res) {
   let title = req.body.titles;
